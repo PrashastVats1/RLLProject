@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LogIn Page</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+    
+    .navbar {
+        margin-bottom: 30px;
+    }
+
+    .admin-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background-color: blueviolet;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        color: #fff;
+        transition: background-color 0.3s;
+    }
+
+    .admin-btn:hover {
+        background-color: #9154c4;
+    }
+
+    .login-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="https://www.techshenanigans.com/">Online Vaccine Management</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<a href="..\Admin\loginadmin.html">
+  <button class="admin-btn">Login as Admin</button>
+</a>
+<div class="container">
+	<div class="row">
+		<div style="width: 40%; margin: 25px auto;">
+		<h3 style="text-align: center;">Login Page</h3>
+		<form method="POST" action="dashboarduser.html">
+			<div class="form-group">
+				<label>Email:</label><input type="text" name="Email" class="form-control" autofocus placeholder="xyz@gmail.com">
+			</div>
+			<div class="form-group">
+				<label>Password:</label><input type="Password" name="Password" class="form-control"  id="password" autofocus placeholder="Password">
+			</div>
+      <h6>Click to get Captcha <img src="https://qph.cf2.quoracdn.net/main-qimg-ae92b32bf2255fc758cf0ea8e4b76b18.webp" width="40px" onclick="cap()"></h6>
+      <label>Enter Captcha:</label>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" readonly id="capt">
+        </div>
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" id="textinput">
+        </div>
+      </div>
+ 
+	<div class="form-group">
+				<button onclick="validcap()" class="btn btn-lg btn-success btn-block">Login</button>
+			</div>
+		</form>
+    
+    <p>New Here?<a href="">Sign Up</a> </p>
+		<p>Forgotten Password?<a href="forgotpassworduser.html">Recover here</a> </p>
+   
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+   const correctPassword = "Bassu@459"; 
+  function cap(){
+    var alpha = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'
+                 ,'W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i',
+                 'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '!','@','#','$','%','^','&','*','+'];
+                 var a = alpha[Math.floor(Math.random()*71)];
+                 var b = alpha[Math.floor(Math.random()*71)];
+                 var c = alpha[Math.floor(Math.random()*71)];
+                 var d = alpha[Math.floor(Math.random()*71)];
+                 var e = alpha[Math.floor(Math.random()*71)];
+                 var f = alpha[Math.floor(Math.random()*71)];
+
+                 var final = a+b+c+d+e+f;
+                 document.getElementById("capt").value=final;
+               }
+               function isValidEmail(email) {
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+              
+  function validcap() {
+    var stg1 = document.getElementById('capt').value;
+    var stg2 = document.getElementById('textinput').value;
+    var enteredPassword = document.getElementById('password').value;
+    var enteredEmail = document.querySelector('input[name="Email"]').value;
+    
+    // Check if the captcha is valid and the password is correct
+    if (stg1 === stg2 && enteredPassword === correctPassword && isValidEmail(enteredEmail)) {
+      alert("Email, password, and captcha are all correct. Form is validated successfully.");
+      // You can proceed with form submission or other actions here.
+    } else if (stg1 !== stg2 && enteredPassword !== correctPassword) {
+      alert("Both password and captcha are incorrect. Please try again.");
+      // Clear the password input field for the user to try again
+      document.getElementById('password').value = "";
+    } else if (stg1 !== stg2) {
+      alert("Captcha is incorrect. Please try again.");
+    } else if (enteredPassword !== correctPassword) {
+      alert("Password is incorrect. Please try again.");
+      // Clear the password input field for the user to try again
+      document.getElementById('password').value = "";
+    } else if (!isValidEmail(enteredEmail)) {
+      alert("Invalid email format. Please enter a valid email address.");
+    }
+  }       
+</script>
+</body>
+
+</html>
