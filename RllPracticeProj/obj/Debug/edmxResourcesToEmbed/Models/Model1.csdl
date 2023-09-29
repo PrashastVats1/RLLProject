@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineVaccineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Login_Admin">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CentreID" Type="Int32" />
+    <NavigationProperty Name="VaccineCentre" Relationship="Self.FK_Login_Admin_Centre" FromRole="Login_Admin" ToRole="VaccineCentres" />
+  </EntityType>
+  <EntityType Name="Login_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="NumberOfDependents" Type="Int32" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Members_Login_Users" FromRole="Login_Users" ToRole="Members" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="AadharNumber" />
+    </Key>
+    <Property Name="AadharNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RefID" Type="Int32" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Dose1Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dose2Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dose1CentreID" Type="Int32" />
+    <Property Name="Dose2CentreID" Type="Int32" />
+    <Property Name="Dose1Data" Type="DateTime" Precision="0" />
+    <Property Name="Dose2Data" Type="DateTime" Precision="0" />
+    <Property Name="Dose1SlotCentreID" Type="Int32" />
+    <Property Name="Dose1SlotDate" Type="DateTime" Precision="0" />
+    <Property Name="Dose2SlotCentreID" Type="Int32" />
+    <Property Name="Dose2SlotDate" Type="DateTime" Precision="0" />
+    <Property Name="Dose1VaccineName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Dose2VaccineName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Login_Users" Relationship="Self.FK_Members_Login_Users" FromRole="Members" ToRole="Login_Users" />
+    <NavigationProperty Name="VaccineCentre" Relationship="Self.FK_Members_Dose1Centre" FromRole="Members" ToRole="VaccineCentres" />
+    <NavigationProperty Name="Slot" Relationship="Self.FK_Members_Dose1Slot" FromRole="Members" ToRole="Slots" />
+    <NavigationProperty Name="VaccineCentre1" Relationship="Self.FK_Members_Dose2Centre" FromRole="Members" ToRole="VaccineCentres" />
+    <NavigationProperty Name="Slot1" Relationship="Self.FK_Members_Dose2Slot" FromRole="Members" ToRole="Slots" />
+  </EntityType>
+  <EntityType Name="Slot">
+    <Key>
+      <PropertyRef Name="CentreID" />
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="CentreID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Members_Dose1Slot" FromRole="Slots" ToRole="Members" />
+    <NavigationProperty Name="Members1" Relationship="Self.FK_Members_Dose2Slot" FromRole="Slots" ToRole="Members" />
+    <NavigationProperty Name="VaccineCentre" Relationship="Self.FK_Slots_Centre" FromRole="Slots" ToRole="VaccineCentres" />
+  </EntityType>
+  <EntityType Name="VaccineCentre">
+    <Key>
+      <PropertyRef Name="CentreID" />
+    </Key>
+    <Property Name="CentreID" Type="Int32" Nullable="false" />
+    <Property Name="Hospital_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="District" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Sales" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Pin_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="VaccineName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="VaccineCost" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Login_Admin" Relationship="Self.FK_Login_Admin_Centre" FromRole="VaccineCentres" ToRole="Login_Admin" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Members_Dose1Centre" FromRole="VaccineCentres" ToRole="Members" />
+    <NavigationProperty Name="Members1" Relationship="Self.FK_Members_Dose2Centre" FromRole="VaccineCentres" ToRole="Members" />
+    <NavigationProperty Name="Slots" Relationship="Self.FK_Slots_Centre" FromRole="VaccineCentres" ToRole="Slots" />
+  </EntityType>
+  <Association Name="FK_Login_Admin_Centre">
+    <End Role="VaccineCentres" Type="Self.VaccineCentre" Multiplicity="0..1" />
+    <End Role="Login_Admin" Type="Self.Login_Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineCentres">
+        <PropertyRef Name="CentreID" />
+      </Principal>
+      <Dependent Role="Login_Admin">
+        <PropertyRef Name="CentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Login_Users">
+    <End Role="Login_Users" Type="Self.Login_Users" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="RefID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Dose1Centre">
+    <End Role="VaccineCentres" Type="Self.VaccineCentre" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineCentres">
+        <PropertyRef Name="CentreID" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="Dose1CentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Dose1Slot">
+    <End Role="Slots" Type="Self.Slot" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slots">
+        <PropertyRef Name="CentreID" />
+        <PropertyRef Name="Date" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="Dose1SlotCentreID" />
+        <PropertyRef Name="Dose1SlotDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Dose2Centre">
+    <End Role="VaccineCentres" Type="Self.VaccineCentre" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineCentres">
+        <PropertyRef Name="CentreID" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="Dose2CentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Dose2Slot">
+    <End Role="Slots" Type="Self.Slot" Multiplicity="0..1" />
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slots">
+        <PropertyRef Name="CentreID" />
+        <PropertyRef Name="Date" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="Dose2SlotCentreID" />
+        <PropertyRef Name="Dose2SlotDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Slots_Centre">
+    <End Role="VaccineCentres" Type="Self.VaccineCentre" Multiplicity="1" />
+    <End Role="Slots" Type="Self.Slot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccineCentres">
+        <PropertyRef Name="CentreID" />
+      </Principal>
+      <Dependent Role="Slots">
+        <PropertyRef Name="CentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OnlineVaccineEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Login_Admin" EntityType="Self.Login_Admin" />
+    <EntitySet Name="Login_Users" EntityType="Self.Login_Users" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Slots" EntityType="Self.Slot" />
+    <EntitySet Name="VaccineCentres" EntityType="Self.VaccineCentre" />
+    <AssociationSet Name="FK_Login_Admin_Centre" Association="Self.FK_Login_Admin_Centre">
+      <End Role="VaccineCentres" EntitySet="VaccineCentres" />
+      <End Role="Login_Admin" EntitySet="Login_Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Login_Users" Association="Self.FK_Members_Login_Users">
+      <End Role="Login_Users" EntitySet="Login_Users" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Dose1Centre" Association="Self.FK_Members_Dose1Centre">
+      <End Role="VaccineCentres" EntitySet="VaccineCentres" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Dose1Slot" Association="Self.FK_Members_Dose1Slot">
+      <End Role="Slots" EntitySet="Slots" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Dose2Centre" Association="Self.FK_Members_Dose2Centre">
+      <End Role="VaccineCentres" EntitySet="VaccineCentres" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Dose2Slot" Association="Self.FK_Members_Dose2Slot">
+      <End Role="Slots" EntitySet="Slots" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Slots_Centre" Association="Self.FK_Slots_Centre">
+      <End Role="VaccineCentres" EntitySet="VaccineCentres" />
+      <End Role="Slots" EntitySet="Slots" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

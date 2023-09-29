@@ -1,0 +1,74 @@
+﻿@model RllPracticeProj.Models.VaccineCentre
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VaccineCentre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hospital_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hospital_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pin_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pin_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VaccineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VaccineCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VaccineCost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CentreID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<RllPracticeProj.Models.Member>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dose1Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dose2Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dose1Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dose2Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dose1VaccineName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dose2VaccineName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Login_Users.EmailID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VaccineCentre.Hospital_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slot.CentreID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VaccineCentre1.Hospital_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slot1.CentreID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dose1Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dose2Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dose1Data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dose2Data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dose1VaccineName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dose2VaccineName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login_Users.EmailID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VaccineCentre.Hospital_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Slot.CentreID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VaccineCentre1.Hospital_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Slot1.CentreID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AadharNumber }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AadharNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AadharNumber })
+        </td>
+    </tr>
+}
+
+</table>

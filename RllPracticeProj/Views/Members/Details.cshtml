@@ -1,0 +1,146 @@
+﻿@model RllPracticeProj.Models.Member
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dose1Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dose1Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dose2Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dose2Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dose1Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dose1Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dose2Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dose2Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dose1VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dose1VaccineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dose2VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dose2VaccineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login_Users.EmailID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login_Users.EmailID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VaccineCentre.Hospital_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VaccineCentre.Hospital_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slot.CentreID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slot.CentreID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VaccineCentre1.Hospital_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VaccineCentre1.Hospital_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slot1.CentreID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slot1.CentreID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AadharNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

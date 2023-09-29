@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OnlineVaccineModelStoreContainer" CdmEntityContainer="OnlineVaccineEntities">
+    <EntitySetMapping Name="Login_Admin">
+      <EntityTypeMapping TypeName="OnlineVaccineModel.Login_Admin">
+        <MappingFragment StoreEntitySet="Login_Admin">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="CentreID" ColumnName="CentreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login_Users">
+      <EntityTypeMapping TypeName="OnlineVaccineModel.Login_Users">
+        <MappingFragment StoreEntitySet="Login_Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="NumberOfDependents" ColumnName="NumberOfDependents" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="OnlineVaccineModel.Member">
+        <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="AadharNumber" ColumnName="AadharNumber" />
+          <ScalarProperty Name="RefID" ColumnName="RefID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Dose1Status" ColumnName="Dose1Status" />
+          <ScalarProperty Name="Dose2Status" ColumnName="Dose2Status" />
+          <ScalarProperty Name="Dose1CentreID" ColumnName="Dose1CentreID" />
+          <ScalarProperty Name="Dose2CentreID" ColumnName="Dose2CentreID" />
+          <ScalarProperty Name="Dose1Data" ColumnName="Dose1Data" />
+          <ScalarProperty Name="Dose2Data" ColumnName="Dose2Data" />
+          <ScalarProperty Name="Dose1SlotCentreID" ColumnName="Dose1SlotCentreID" />
+          <ScalarProperty Name="Dose1SlotDate" ColumnName="Dose1SlotDate" />
+          <ScalarProperty Name="Dose2SlotCentreID" ColumnName="Dose2SlotCentreID" />
+          <ScalarProperty Name="Dose2SlotDate" ColumnName="Dose2SlotDate" />
+          <ScalarProperty Name="Dose1VaccineName" ColumnName="Dose1VaccineName" />
+          <ScalarProperty Name="Dose2VaccineName" ColumnName="Dose2VaccineName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Slots">
+      <EntityTypeMapping TypeName="OnlineVaccineModel.Slot">
+        <MappingFragment StoreEntitySet="Slots">
+          <ScalarProperty Name="CentreID" ColumnName="CentreID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VaccineCentres">
+      <EntityTypeMapping TypeName="OnlineVaccineModel.VaccineCentre">
+        <MappingFragment StoreEntitySet="VaccineCentres">
+          <ScalarProperty Name="CentreID" ColumnName="CentreID" />
+          <ScalarProperty Name="Hospital_Name" ColumnName="Hospital_Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Sales" ColumnName="Sales" />
+          <ScalarProperty Name="Pin_code" ColumnName="Pin_code" />
+          <ScalarProperty Name="VaccineName" ColumnName="VaccineName" />
+          <ScalarProperty Name="VaccineCost" ColumnName="VaccineCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
