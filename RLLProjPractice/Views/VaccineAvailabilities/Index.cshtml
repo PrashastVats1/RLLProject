@@ -1,0 +1,45 @@
+﻿@model IEnumerable<RLLProjPractice.Models.VaccineAvailability>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAvailable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityAvailable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vaccine.VaccineName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AvailabilityID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AvailabilityID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AvailabilityID })
+        </td>
+    </tr>
+}
+
+</table>

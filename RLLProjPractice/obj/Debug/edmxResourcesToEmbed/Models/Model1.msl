@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VaccineMgmtModelStoreContainer" CdmEntityContainer="VaccineMgmtEntities">
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="VaccineMgmtModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="VaccineID" ColumnName="VaccineID" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="Slot" ColumnName="Slot" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="VaccineMgmtModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="VaccineMgmtModel.UserType">
+        <MappingFragment StoreEntitySet="UserType">
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="UserTypeDescription" ColumnName="UserTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vaccines">
+      <EntityTypeMapping TypeName="VaccineMgmtModel.Vaccine">
+        <MappingFragment StoreEntitySet="Vaccine">
+          <ScalarProperty Name="VaccineID" ColumnName="VaccineID" />
+          <ScalarProperty Name="VaccineName" ColumnName="VaccineName" />
+          <ScalarProperty Name="VaccineDescription" ColumnName="VaccineDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VaccineAvailabilities">
+      <EntityTypeMapping TypeName="VaccineMgmtModel.VaccineAvailability">
+        <MappingFragment StoreEntitySet="VaccineAvailability">
+          <ScalarProperty Name="AvailabilityID" ColumnName="AvailabilityID" />
+          <ScalarProperty Name="VaccineID" ColumnName="VaccineID" />
+          <ScalarProperty Name="DateAvailable" ColumnName="DateAvailable" />
+          <ScalarProperty Name="QuantityAvailable" ColumnName="QuantityAvailable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

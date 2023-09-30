@@ -1,0 +1,48 @@
+﻿@model RLLProjPractice.Models.VaccineAvailability
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VaccineAvailability</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vaccine.VaccineName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

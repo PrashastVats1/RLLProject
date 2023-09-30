@@ -1,0 +1,42 @@
+﻿@model RLLProjPractice.Models.VaccineAvailability
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VaccineAvailability</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vaccine.VaccineName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AvailabilityID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
