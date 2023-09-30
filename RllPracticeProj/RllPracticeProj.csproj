@@ -267,6 +267,9 @@
     <Content Include="Views\Login_Admin\ForgotPassword.cshtml" />
     <Content Include="Views\Login_Admin\Dashboard.cshtml" />
     <Content Include="Views\Login_Admin\Logout.cshtml" />
+    <Content Include="Views\Login_Users\Dashboard.cshtml" />
+    <Content Include="Views\Login_Users\Login.cshtml" />
+    <Content Include="Views\Login_Users\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
