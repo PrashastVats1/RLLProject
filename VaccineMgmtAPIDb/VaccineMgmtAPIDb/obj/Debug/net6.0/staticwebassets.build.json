@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "NLU/8oWMp75GzJosAUX+xIpyrWo1bhyza/EdcbfyKt4=",
+  "Source": "VaccineMgmtAPIDb",
+  "BasePath": "_content/VaccineMgmtAPIDb",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
