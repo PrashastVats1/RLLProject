@@ -1,0 +1,9 @@
+.inverted-greeting {
+  background-color: black; /* change this to any desired color */
+  color: white; /* change this to any desired color */
+  padding: 0.5rem; /* provide a little padding around the text */
+  border-radius: 0.25rem; /* round the corners slightly */
+  width: 200px; /* fixed width */
+  /* width: 15%;*/
+  text-align: center; /* to center the greeting text within the defined width */
+}

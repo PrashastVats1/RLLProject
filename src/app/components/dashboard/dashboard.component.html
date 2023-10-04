@@ -1,0 +1,130 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarNav"
+    >
+      <div class="d-flex align-items-center w-100">
+        <div class="mb-0 ml-3 inverted-greeting">
+          Hello,
+          <h6 class="d-inline">{{ fullName }}</h6>
+          !
+        </div>
+        <input
+          type="text"
+          class="form-control mx-3 flex-grow-1"
+          placeholder="Search..."
+        />
+        <button (click)="logout()" class="btn btn-danger mr-3" type="button">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Dashboard Content -->
+<div class="container mt-5">
+  <div class="row">
+    <!-- Sidebar/Menu -->
+    <ng-container *ngIf="role === 'Admin'">
+      <div class="col-md-3">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active"
+            >Dashboard</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            routerLink="/inventory"
+            >Inventory</a
+          >
+          <a href="#" class="list-group-item list-group-item-action"
+            >Distribution</a
+          >
+          <a href="#" class="list-group-item list-group-item-action">Reports</a>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="role === 'User'">
+      <div class="col-md-3">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active"
+            >Dashboard</a
+          >
+          <a href="#" class="list-group-item list-group-item-action"
+            >Book a Vaccine</a
+          >
+          <a href="#" class="list-group-item list-group-item-action"
+            >Vaccine History</a
+          >
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Main Content Area -->
+    <div class="col-md-9">
+      <!-- Cards for quick stats -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Vaccines</h5>
+              <!-- <p class="card-text">{{ totalVaccines }}</p> -->
+              <p>Total Vaccines</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Vaccines Distributed</h5>
+              <!-- <p class="card-text">{{ vaccinesDistributed }}</p> -->
+              <p>Vaccines Distributed</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Remaining Stock</h5>
+              <!-- <p class="card-text">{{ remainingStock }}</p> -->
+              <p>Remaining Stock</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional content, tables, charts, etc. can be added here -->
+      <h3>Registered Users</h3>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">User Name</th>
+              <th scope="col">Email Id</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.userName }}</td>
+              <td>{{ user.email }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container text-center">
+    <span class="text-muted">© 2023 Vaccine Management Corp.</span>
+  </div>
+</footer>
