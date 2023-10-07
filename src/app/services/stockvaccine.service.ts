@@ -1,37 +1,41 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { VaccineStock } from '../models/stock-vaccine.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StockvaccineService {
-  private baseUrl: string = 'http://localhost:5063/api/VaccineStocks';
+  private baseUrl: string = 'http://localhost:5063/api/';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient, private router: Router) {}
-
-  // Fetch all Vaccine Stocks
-  getVaccineStocks() {
-    return this.http.get<any[]>(`${this.baseUrl}`);
+  getAllVaccines(): Observable<VaccineStock[]> {
+    return this.http.get<VaccineStock[]>(this.baseUrl + 'VaccineStocks');
   }
 
-  // Fetch a single Vaccine Stock by ID
-  getVaccineStock(id: number) {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+  addVaccineStock(addVaccine: VaccineStock): Observable<VaccineStock> {
+    return this.http.post<VaccineStock>(
+      this.baseUrl + 'VaccineStocks',
+      addVaccine
+    );
   }
 
-  // Add a new Vaccine Stock
-  addVaccineStock(vaccineStockObj: any) {
-    return this.http.post<any>(`${this.baseUrl}`, vaccineStockObj);
+  getVaccine(id: string): Observable<VaccineStock> {
+    return this.http.get<VaccineStock>(this.baseUrl + 'VaccineStocks/' + id);
   }
 
-  // Update an existing Vaccine Stock
-  updateVaccineStock(id: number, vaccineStockObj: any) {
-    return this.http.put<any>(`${this.baseUrl}/${id}`, vaccineStockObj);
+  updateVaccine(
+    id: number,
+    updateVaccine: VaccineStock
+  ): Observable<VaccineStock> {
+    return this.http.put<VaccineStock>(
+      this.baseUrl + 'VaccineStocks/' + id,
+      updateVaccine
+    );
   }
 
-  // Delete a Vaccine Stock by ID
-  deleteVaccineStock(id: number) {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`);
+  deleteVaccine(id: number): Observable<VaccineStock> {
+    return this.http.delete<VaccineStock>(this.baseUrl + 'VaccineStocks/' + id);
   }
 }

@@ -1,0 +1,62 @@
+<div class="container my-5">
+  <h3 class="mb-3">Add New Vaccine</h3>
+  <div class="row">
+    <div class="col-6">
+      <form #form="ngForm" (ngSubmit)="addVaccineStock()">
+        <!-- Vaccine Name -->
+        <div class="mb-3">
+          <label for="vaccineName" class="form-label">Vaccine Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="vaccineName"
+            placeholder="Enter vaccine name"
+            name="vaccineName"
+            [(ngModel)]="addVaccine.vaccineName"
+          />
+        </div>
+
+        <!-- Manufacturer -->
+        <div class="mb-3">
+          <label for="manufacturer" class="form-label">Manufacturer</label>
+          <input
+            type="text"
+            class="form-control"
+            id="manufacturer"
+            placeholder="Enter manufacturer name"
+            name="manufacturer"
+            [(ngModel)]="addVaccine.manufacturer"
+          />
+        </div>
+
+        <!-- Expiry Date -->
+        <div class="mb-3">
+          <label for="expiryDate" class="form-label">Expiry Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="expiryDate"
+            name="expiryDate"
+            [(ngModel)]="addVaccine.expiryDate"
+          />
+        </div>
+
+        <!-- Stock -->
+        <div class="mb-3">
+          <label for="stock" class="form-label">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="stock"
+            placeholder="Enter stock amount"
+            name="stock"
+            [(ngModel)]="addVaccine.stock"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Add Vaccine</button>
+      </form>
+    </div>
+  </div>
+</div>

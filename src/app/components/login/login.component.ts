@@ -10,6 +10,7 @@ import ValidateForm from 'src/app/helpers/validateform';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { ResetPasswordService } from 'src/app/services/reset-password.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +18,19 @@ import { UserStoreService } from 'src/app/services/user-store.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  public loginForm!: FormGroup;
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
-  loginForm!: FormGroup;
+  public resetPasswordEmail!: string;
+  public isValidEmail!: boolean;
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
     private toastr: ToastrService,
-    private userStore: UserStoreService
+    private userStore: UserStoreService,
+    private resetService: ResetPasswordService
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +64,7 @@ export class LoginComponent implements OnInit {
         error: (err) => {
           //alert(err?.error.message);
           // Using toastr for error message
-          this.toastr.error(err?.error.message, 'Error');
+          this.toastr.error('UserName or Password was incorrect', 'Error');
           console.log(err);
         },
       });
@@ -71,6 +75,36 @@ export class LoginComponent implements OnInit {
       // Using toastr to notify invalid form
       this.toastr.error('Your form is invalid', 'Error');
       //alert('Your form is invalid');
+    }
+  }
+
+  checkValidEmail(event: string) {
+    const value = event;
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
+
+  confirmToSend() {
+    if (this.checkValidEmail(this.resetPasswordEmail)) {
+      console.log(this.resetPasswordEmail);
+      // this.resetPasswordEmail = '';
+      // const buttonRef = document.getElementById('closeBtn');
+      // buttonRef?.click();
+      //api call
+      this.resetService
+        .sendResetPasswordLink(this.resetPasswordEmail)
+        .subscribe({
+          next: (res) => {
+            this.toastr.success('Success', 'Reset Link Sent Successfully');
+            this.resetPasswordEmail = '';
+            const buttonRef = document.getElementById('closeBtn');
+            buttonRef?.click();
+          },
+          error: (err) => {
+            this.toastr.error('Something went wrong', 'ERROR');
+          },
+        });
     }
   }
 }

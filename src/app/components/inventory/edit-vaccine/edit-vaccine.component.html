@@ -1,0 +1,84 @@
+<div class="container my-5">
+  <h3 class="mb-4 text-center">Edit Vaccine</h3>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form #form="ngForm" (ngSubmit)="updateVaccine()">
+        <!-- Vaccine Id -->
+        <div class="mb-4">
+          <label for="Id" class="form-label">Vaccine Id</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Id"
+            placeholder="Enter vaccine Id"
+            name="Id"
+            [(ngModel)]="vaccineDetails.id"
+          />
+        </div>
+
+        <!-- Vaccine Name -->
+        <div class="mb-4">
+          <label for="vaccineName" class="form-label">Vaccine Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="vaccineName"
+            placeholder="Enter vaccine name"
+            name="vaccineName"
+            [(ngModel)]="vaccineDetails.vaccineName"
+          />
+        </div>
+
+        <!-- Manufacturer -->
+        <div class="mb-4">
+          <label for="manufacturer" class="form-label">Manufacturer</label>
+          <input
+            type="text"
+            class="form-control"
+            id="manufacturer"
+            placeholder="Enter manufacturer name"
+            name="manufacturer"
+            [(ngModel)]="vaccineDetails.manufacturer"
+          />
+        </div>
+
+        <!-- Expiry Date -->
+        <div class="mb-4">
+          <label for="expiryDate" class="form-label">Expiry Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="expiryDate"
+            name="expiryDate"
+            [(ngModel)]="vaccineDetails.expiryDate"
+          />
+        </div>
+
+        <!-- Stock -->
+        <div class="mb-4">
+          <label for="stock" class="form-label">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="stock"
+            placeholder="Enter stock amount"
+            name="stock"
+            [(ngModel)]="vaccineDetails.stock"
+          />
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Edit Vaccine</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteVaccine(vaccineDetails.id)"
+          >
+            Delete Vaccine
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

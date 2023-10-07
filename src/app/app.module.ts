@@ -12,6 +12,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ResetComponent } from './components/reset/reset.component';
+import { AddVaccineComponent } from './components/inventory/add-vaccine/add-vaccine.component';
+import { EditVaccineComponent } from './components/inventory/edit-vaccine/edit-vaccine.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SignupComponent,
     DashboardComponent,
     InventoryComponent,
+    ResetComponent,
+    AddVaccineComponent,
+    EditVaccineComponent,
   ],
   imports: [
     FormsModule,
