@@ -1,124 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VaccineMgmtAPIDb.Context;
 using VaccineMgmtAPIDb.Models;
 
 namespace VaccineMgmtAPIDb.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class VaccineStocksController : ControllerBase
+    [Route("api/[controller]")]
+    public class VaccineStocksController : Controller
     {
-        private readonly AppDbContext _context;
-
-        public VaccineStocksController(AppDbContext context)
+        private readonly AppDbContext _appDbContext;
+        public VaccineStocksController(AppDbContext appDbContext)
         {
-            _context = context;
+            _appDbContext = appDbContext;
         }
-
-        // GET: api/VaccineStocks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VaccineStock>>> GetVaccineStock()
+        public async Task<IActionResult> GetAllVaccines()
         {
-          if (_context.VaccineStock == null)
-          {
-              return NotFound();
-          }
-            return await _context.VaccineStock.ToListAsync();
+            var vaccineStock = await _appDbContext.VaccineStock.ToListAsync();
+            return Ok(vaccineStock);
         }
 
-        // GET: api/VaccineStocks/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<VaccineStock>> GetVaccineStock(int id)
-        {
-          if (_context.VaccineStock == null)
-          {
-              return NotFound();
-          }
-            var vaccineStock = await _context.VaccineStock.FindAsync(id);
-
-            if (vaccineStock == null)
-            {
-                return NotFound();
-            }
-
-            return vaccineStock;
-        }
-
-        // PUT: api/VaccineStocks/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVaccineStock(int id, VaccineStock vaccineStock)
-        {
-            if (id != vaccineStock.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(vaccineStock).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VaccineStockExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/VaccineStocks
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<VaccineStock>> PostVaccineStock(VaccineStock vaccineStock)
+        public async Task<IActionResult> AddVaccine([FromBody] VaccineStock addVaccine)
         {
-          if (_context.VaccineStock == null)
-          {
-              return Problem("Entity set 'AppDbContext.VaccineStock'  is null.");
-          }
-            _context.VaccineStock.Add(vaccineStock);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetVaccineStock", new { id = vaccineStock.Id }, vaccineStock);
+            await _appDbContext.VaccineStock.AddAsync(addVaccine);
+            await _appDbContext.SaveChangesAsync();
+            return Ok(addVaccine);
         }
 
-        // DELETE: api/VaccineStocks/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVaccineStock(int id)
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetVaccine([FromRoute] int id)
         {
-            if (_context.VaccineStock == null)
+            var vaccine = await _appDbContext.VaccineStock.FirstOrDefaultAsync(x => x.Id == id);
+            if(vaccine == null)
             {
                 return NotFound();
             }
-            var vaccineStock = await _context.VaccineStock.FindAsync(id);
-            if (vaccineStock == null)
+            return Ok(vaccine);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateVaccine([FromRoute] int id, VaccineStock updateVaccine)
+        {
+            var vaccine = await _appDbContext.VaccineStock.FindAsync(id);
+            if(vaccine == null)
+            {
+                return NotFound();
+            }
+            vaccine.VaccineName = updateVaccine.VaccineName;
+            vaccine.Manufacturer = updateVaccine.Manufacturer;
+            vaccine.ExpiryDate = updateVaccine.ExpiryDate;
+            vaccine.Stock = updateVaccine.Stock;
+
+            await _appDbContext.SaveChangesAsync();
+
+            return Ok(vaccine);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteVaccine([FromRoute] int id)
+        {
+            var vaccine = await _appDbContext.VaccineStock.FirstOrDefaultAsync(x => x.Id == id);
+            if(vaccine == null)
             {
                 return NotFound();
             }
 
-            _context.VaccineStock.Remove(vaccineStock);
-            await _context.SaveChangesAsync();
+            _appDbContext.VaccineStock.Remove(vaccine);
+            await _appDbContext.SaveChangesAsync();
 
-            return NoContent();
-        }
-
-        private bool VaccineStockExists(int id)
-        {
-            return (_context.VaccineStock?.Any(e => e.Id == id)).GetValueOrDefault();
+            return Ok(vaccine);
         }
     }
 }
