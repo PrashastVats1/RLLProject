@@ -26,6 +26,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BookingslotComponent } from './components/bookingslot/bookingslot.component';
 import { EditSlotComponent } from './components/bookingslot/edit-slot/edit-slot.component';
 import { AddSlotComponent } from './components/bookingslot/add-slot/add-slot.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { AddSlotComponent } from './components/bookingslot/add-slot/add-slot.com
       preventDuplicates: true,
     }),
     NgbModule,
+    RecaptchaModule,
   ],
   providers: [
     {

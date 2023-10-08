@@ -1,3 +1,11 @@
 #forgot:hover {
   cursor: pointer;
 }
+
+.form-inline.fr {
+  margin-bottom: 20px;
+}
+
+re-captcha {
+  margin: 20px 0;
+}

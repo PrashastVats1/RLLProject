@@ -69,6 +69,10 @@
                   >Forgot Password?</a
                 >
               </div>
+              <re-captcha
+                (resolved)="resolved($event)"
+                siteKey="6LfSgocoAAAAAHNIaGSjPhBHf1J8I0bHp_etyDaK"
+              ></re-captcha>
               <button
                 (click)="onLogin()"
                 type="submit"

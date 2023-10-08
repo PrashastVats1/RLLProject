@@ -107,4 +107,8 @@ export class LoginComponent implements OnInit {
         });
     }
   }
+  resolved(captchaResponse: string) {
+    console.log(`Resolved CAPTCHA with response: ${captchaResponse}`);
+    // You can send this response to your backend to verify it using the secret key.
+  }
 }
