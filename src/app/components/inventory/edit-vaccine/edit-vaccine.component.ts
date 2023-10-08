@@ -51,6 +51,7 @@ export class EditVaccineComponent implements OnInit {
       .updateVaccine(this.vaccineDetails.id, this.vaccineDetails)
       .subscribe({
         next: (response) => {
+          this.toastr.success('Record Updated!', 'Success!');
           this.router.navigate(['inventory']);
         },
         error: (response: any) => {
@@ -63,6 +64,7 @@ export class EditVaccineComponent implements OnInit {
   deleteVaccine(id: number) {
     this.vaccineService.deleteVaccine(id).subscribe({
       next: (response) => {
+        this.toastr.success('Record Deleted!', 'Success!');
         this.router.navigate(['inventory']);
       },
       error: (response: any) => {

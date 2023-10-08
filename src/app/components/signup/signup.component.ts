@@ -49,7 +49,8 @@ export class SignupComponent implements OnInit {
         error: (err) => {
           console.log(err);
           this.toastr.error(
-            err?.error?.message || 'An error occurred',
+            err?.error?.message ||
+              'Password should be Alphanumeric with at least one special character and one capital letter or Username or Email already exists',
             'Error'
           ); // <-- Using toastr for error message
         },

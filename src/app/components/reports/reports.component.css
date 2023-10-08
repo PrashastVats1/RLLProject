@@ -1,0 +1,58 @@
+/* Overall Page Styling */
+body {
+  background-color: #f7f8fc;
+  font-family: "Arial", sans-serif;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
+}
+
+/* Navbar Styling */
+.nav {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+.nav-link {
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.nav-link.active {
+  font-weight: 600;
+  color: #007bff;
+}
+
+/* Button & Table Styling */
+.btn-primary {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+}

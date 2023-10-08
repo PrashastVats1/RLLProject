@@ -1,0 +1,62 @@
+<div class="container my-5">
+  <h3 class="mb-4 text-center">Edit Vaccine</h3>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form #form="ngForm" (ngSubmit)="updateVaccine()">
+        <!-- Vaccine Id -->
+        <div class="mb-4">
+          <label for="Id" class="form-label">Centre Id</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Id"
+            placeholder="Enter centre Id"
+            name="Id"
+            [(ngModel)]="centreDetails.centerId"
+          />
+        </div>
+
+        <!-- Vaccine Name -->
+        <div class="mb-4">
+          <label for="centreName" class="form-label">Centre Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="centreName"
+            placeholder="Enter centre name"
+            name="centreName"
+            [(ngModel)]="centreDetails.centreName"
+          />
+        </div>
+
+        <!-- Manufacturer -->
+        <div class="mb-4">
+          <label for="city" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            placeholder="Enter city name"
+            name="city"
+            [(ngModel)]="centreDetails.city"
+          />
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Edit Centre</button>
+          <button routerLink="/distribution" class="btn btn-secondary ml-3">
+            Back to Centers
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteVaccine(centreDetails.centerId)"
+          >
+            Delete Centre
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

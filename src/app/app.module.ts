@@ -15,6 +15,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResetComponent } from './components/reset/reset.component';
 import { AddVaccineComponent } from './components/inventory/add-vaccine/add-vaccine.component';
 import { EditVaccineComponent } from './components/inventory/edit-vaccine/edit-vaccine.component';
+import { DistributionComponent } from './components/distribution/distribution.component';
+import { AddCenterComponent } from './components/distribution/add-center/add-center.component';
+import { EditCenterComponent } from './components/distribution/edit-center/edit-center.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { NgChartsModule } from 'ng2-charts';
+import { AboutComponent } from './components/dashboard/about/about.component';
+import { ContactComponent } from './components/dashboard/contact/contact.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { BookingslotComponent } from './components/bookingslot/bookingslot.component';
+import { EditSlotComponent } from './components/bookingslot/edit-slot/edit-slot.component';
+import { AddSlotComponent } from './components/bookingslot/add-slot/add-slot.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +37,21 @@ import { EditVaccineComponent } from './components/inventory/edit-vaccine/edit-v
     ResetComponent,
     AddVaccineComponent,
     EditVaccineComponent,
+    DistributionComponent,
+    AddCenterComponent,
+    EditCenterComponent,
+    ReportsComponent,
+    AboutComponent,
+    ContactComponent,
+    NavbarComponent,
+    BookingslotComponent,
+    EditSlotComponent,
+    AddSlotComponent,
   ],
   imports: [
     FormsModule,
     BrowserModule,
+    NgChartsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -38,7 +60,8 @@ import { EditVaccineComponent } from './components/inventory/edit-vaccine/edit-v
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    }), NgbModule,
+    }),
+    NgbModule,
   ],
   providers: [
     {

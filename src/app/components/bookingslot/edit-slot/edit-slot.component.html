@@ -1,0 +1,172 @@
+<div class="container my-5">
+  <h3 class="mb-4 text-center">Edit Booking Slot</h3>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form #form="ngForm" (ngSubmit)="updateVaccine()">
+        <!-- First Name -->
+        <div class="mb-4">
+          <label for="firstName" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            placeholder="Enter first name"
+            name="firstName"
+            [(ngModel)]="bookingDetails.firstName"
+          />
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-4">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            placeholder="Enter last name"
+            name="lastName"
+            [(ngModel)]="bookingDetails.lastName"
+          />
+        </div>
+
+        <!-- User Name -->
+        <div class="mb-4">
+          <label for="userName" class="form-label">User Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userName"
+            placeholder="Enter user name"
+            name="userName"
+            [(ngModel)]="bookingDetails.userName"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-4">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+            [(ngModel)]="bookingDetails.email"
+          />
+        </div>
+
+        <!-- Address -->
+        <div class="mb-4">
+          <label for="address" class="form-label">Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            placeholder="Enter address"
+            name="address"
+            [(ngModel)]="bookingDetails.address"
+          />
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-4">
+          <label for="gender" class="form-label">Gender</label>
+          <select
+            class="form-control"
+            id="gender"
+            name="gender"
+            [(ngModel)]="bookingDetails.gender"
+          >
+            <option *ngFor="let gender of genderOptions" [value]="gender">
+              {{ gender }}
+            </option>
+          </select>
+        </div>
+
+        <!-- DateOfBooking -->
+        <div class="mb-4">
+          <label for="dateOfBooking" class="form-label">Date of Booking</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dateOfBooking"
+            name="dateOfBooking"
+            [(ngModel)]="bookingDetails.dateOfBooking"
+          />
+        </div>
+
+        <!-- City -->
+        <div class="mb-4">
+          <label for="city" class="form-label">City</label>
+          <select
+            class="form-control"
+            id="city"
+            name="city"
+            [(ngModel)]="bookingDetails.city"
+            (change)="onCityChange()"
+          >
+            <option *ngFor="let city of cities" [value]="city">
+              {{ city }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Centre -->
+        <div class="mb-4" *ngIf="bookingDetails.city">
+          <label for="vaccineCentre" class="form-label">Vaccine Centre</label>
+          <select
+            class="form-control"
+            id="vaccineCentre"
+            name="vaccineCentre"
+            [(ngModel)]="bookingDetails.vaccineCentre"
+            (change)="onCentreChange()"
+          >
+            <option
+              *ngFor="let centre of vaccineCentres[bookingDetails.city]"
+              [value]="centre"
+            >
+              {{ centre }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Vaccine Name -->
+        <div class="mb-4" *ngIf="bookingDetails.vaccineCentre">
+          <label for="vaccineName" class="form-label">Vaccine Name</label>
+          <select
+            class="form-control"
+            id="vaccineName"
+            name="vaccineName"
+            [(ngModel)]="bookingDetails.vaccineName"
+          >
+            <option
+              *ngFor="let vaccine of vaccines[bookingDetails.vaccineCentre]"
+              [value]="vaccine"
+            >
+              {{ vaccine }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="submit" class="btn btn-primary">Edit Vaccine</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteVaccine(bookingDetails.userId)"
+          >
+            Delete Vaccine
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            routerLink="/bookingslot"
+          >
+            Back to Booking Slot
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

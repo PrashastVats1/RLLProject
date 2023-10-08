@@ -1,0 +1,124 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-5">Vaccine Distribution Report (Last 6 Months)</h2>
+  <p>
+    As part of our ongoing commitment to transparency, we are providing a
+    monthly breakdown of the vaccine distributions over the last six months.
+    Here's a detailed report of the number of vaccines taken:
+  </p>
+
+  <!-- Search box for filtering -->
+  <div class="my-3">
+    <input
+      [(ngModel)]="searchTerm"
+      class="form-control"
+      placeholder="Search by vaccine name..."
+    />
+  </div>
+
+  <div class="row">
+    <div class="mb-4">
+      <ng-container *ngIf="role === 'Admin'">
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="#" class="nav-link active">Reports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/distribution">Distribution</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/inventory">Inventory</a>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-container *ngIf="role === 'User'">
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="#" class="nav-link active">Reports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/bookingslot">BookingSlot</a>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+    <!-- Toggle button for report -->
+    <button class="btn btn-primary mb-3" (click)="toggleReport()">
+      Show {{ showFullReport ? "Summarized" : "Full" }} Report
+    </button>
+
+    <table *ngIf="showFullReport" class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Vaccine Name</th>
+          <th>January</th>
+          <th>February</th>
+          <th>March</th>
+          <th>April</th>
+          <th>May</th>
+          <th>June</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vaccine of filterVaccines()">
+          <td>{{ vaccine.name }}</td>
+          <td>{{ vaccine.jan }}</td>
+          <td>{{ vaccine.feb }}</td>
+          <td>{{ vaccine.mar }}</td>
+          <td>{{ vaccine.apr }}</td>
+          <td>{{ vaccine.may }}</td>
+          <td>{{ vaccine.jun }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Summarized report goes here -->
+    <div *ngIf="!showFullReport">
+      <h4 class="mb-4">Vaccine Distribution Summary (Last 6 Months)</h4>
+      <div style="display: block; width: 70%; margin: 0 auto">
+        <canvas
+          baseChart
+          [type]="pieChartType"
+          [datasets]="pieChartData"
+          [labels]="pieChartLabels"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend"
+        >
+        </canvas>
+      </div>
+
+      <table class="table table-striped mt-4">
+        <thead>
+          <tr>
+            <th>Vaccine Name</th>
+            <th>Total Taken</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of totalVaccines">
+            <td>{{ v.name }}</td>
+            <td>{{ v.total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-5">
+      This data represents the overall distribution across all our centers. For
+      more detailed insights or further queries, please reach out to our data
+      analytics team.
+    </p>
+  </div>
+  <!-- Footer -->
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container text-center">
+      <span class="text-muted">© 2023 Vaccine Management Corp.</span>
+    </div>
+  </footer>
+</div>

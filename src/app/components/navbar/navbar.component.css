@@ -1,0 +1,85 @@
+body {
+  padding-top: 90px; /* Increase a bit to account for navbar's vertical padding */
+}
+
+.navbar {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; /* Vertical padding added */
+}
+
+.inverted-greeting {
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.inverted-greeting h6 {
+  display: inline-block;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.btn {
+  background-size: 200% auto;
+  transition: background-position 0.5s;
+  background-image: linear-gradient(
+    to right,
+    #6ce2ff,
+    #0078ff
+  ); /* default gradient */
+  color: #fff; /* white text color */
+  border: none;
+  border-radius: 5px; /* slight roundness */
+}
+
+.btn:hover {
+  background-position: -200% 0;
+}
+
+.btn-dashboard {
+  background-image: linear-gradient(
+    to right,
+    #9b7bcc,
+    #6143a6
+  ); /* purple gradient */
+  background-size: 200% auto; /* Stretch the background image */
+  transition: background-position 0.5s; /* Animation transition time */
+}
+
+.btn-primary {
+  background-image: linear-gradient(
+    to right,
+    #6ce2ff,
+    #0078ff
+  ); /* blue gradient */
+}
+
+.btn-success {
+  background-image: linear-gradient(
+    to right,
+    #7df387,
+    #4ca81a
+  ); /* updated green gradient */
+}
+
+.btn-danger {
+  background-image: linear-gradient(
+    to right,
+    #ff6c6c,
+    #d20000
+  ); /* red gradient */
+}
+
+.navbar .btn {
+  margin-left: 10px;
+  padding: 0.375rem 0.75rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  vertical-align: middle;
+}

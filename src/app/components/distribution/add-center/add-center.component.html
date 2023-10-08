@@ -1,0 +1,42 @@
+<div class="container my-5">
+  <h3 class="mb-3">Add New Centre</h3>
+  <div class="row">
+    <div class="col-6">
+      <form #form="ngForm" (ngSubmit)="addVaccineCentre()">
+        <!-- Vaccine Name -->
+        <div class="mb-3">
+          <label for="centreName" class="form-label">Centre Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="centreName"
+            placeholder="Enter centre name"
+            name="centreName"
+            [(ngModel)]="addCentre.centreName"
+          />
+        </div>
+
+        <!-- Manufacturer -->
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            placeholder="Enter city name"
+            name="city"
+            [(ngModel)]="addCentre.city"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Add Center</button>
+          <button routerLink="/distribution" class="btn btn-secondary ml-3">
+            Back to Centers
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

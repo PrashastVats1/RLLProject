@@ -1,9 +1,31 @@
-.inverted-greeting {
-  background-color: black; /* change this to any desired color */
-  color: white; /* change this to any desired color */
-  padding: 0.5rem; /* provide a little padding around the text */
-  border-radius: 0.25rem; /* round the corners slightly */
-  width: 200px; /* fixed width */
-  /* width: 15%;*/
-  text-align: center; /* to center the greeting text within the defined width */
+h3,
+h4 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+ul {
+  margin-top: 20px;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+.bold-action {
+  font-size: 1.1em;
+  margin-top: 30px;
+}
+
+.action-link {
+  font-weight: bold;
+  color: #007bff; /* or any other color you want */
+  text-decoration: underline;
+}
+
+hr {
+  border-top: 2px solid #eee;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }

@@ -1,0 +1,57 @@
+<div class="container mt-4 contact-section">
+  <h2 class="section-title">Contact Us</h2>
+  <p class="intro-text">
+    Need more information or have questions? Reach out to us!
+  </p>
+
+  <div class="contact-details">
+    <h4>Our Address</h4>
+    <p>221B Vaccine Road, Bengaluru, 560001</p>
+    <h4>Email</h4>
+    <p>contactus@vaccinemanagement.com</p>
+    <h4>Phone</h4>
+    <p>+91 9999-999-999</p>
+  </div>
+
+  <h3 class="section-title mt-3">Send Us A Message</h3>
+  <form
+    class="contact-form"
+    (ngSubmit)="onSubmit(contactForm)"
+    #contactForm="ngForm"
+  >
+    <input
+      type="text"
+      placeholder="Name"
+      class="form-control mb-2"
+      name="name"
+      [(ngModel)]="formData.name"
+    />
+    <input
+      type="email"
+      placeholder="Email"
+      class="form-control mb-2"
+      name="email"
+      [(ngModel)]="formData.email"
+    />
+    <textarea
+      placeholder="Your Message"
+      class="form-control mb-2"
+      name="message"
+      [(ngModel)]="formData.message"
+    ></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <div class="map mt-4">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.993643355591!2d77.59129941446669!3d12.979119790857492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sus!4v1633650023621!5m2!1sen!2sus"
+      width="600"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+    ></iframe>
+  </div>
+
+  <footer class="footer mt-4">Registered with XYZ Company &reg;</footer>
+</div>

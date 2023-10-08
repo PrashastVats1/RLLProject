@@ -1,3 +1,7 @@
+.container {
+  margin-top: 80px !important;
+}
+
 .form-control {
   border: 1px solid #ced4da;
 }

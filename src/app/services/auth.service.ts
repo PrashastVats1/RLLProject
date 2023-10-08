@@ -46,4 +46,9 @@ export class AuthService {
   getRoleFromToken() {
     if (this.userPayload) return this.userPayload.role;
   }
+
+  getCurrentUserName(): string {
+    const decoded = this.decodedToken();
+    return decoded ? decoded.userName : '';
+  }
 }

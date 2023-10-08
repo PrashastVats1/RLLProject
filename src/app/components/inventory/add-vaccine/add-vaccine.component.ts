@@ -30,6 +30,7 @@ export class AddVaccineComponent implements OnInit {
     this.vaccineService.addVaccineStock(this.addVaccine).subscribe({
       next: (vaccineStock) => {
         console.log(vaccineStock);
+        this.toastr.success('Vaccine Added Successfully', 'Success!');
         this.router.navigate(['inventory']);
       },
       error: (response: any) => {

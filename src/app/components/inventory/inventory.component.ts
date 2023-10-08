@@ -10,6 +10,17 @@ import { StockvaccineService } from 'src/app/services/stockvaccine.service';
 })
 export class InventoryComponent implements OnInit {
   vaccineStock: VaccineStock[] = [];
+  searchTerm: string = '';
+
+  // Getter to return filtered vaccines based on search term
+  get filteredVaccines(): VaccineStock[] {
+    if (!this.searchTerm) {
+      return this.vaccineStock;
+    }
+    return this.vaccineStock.filter((vaccine) =>
+      vaccine.vaccineName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
 
   constructor(
     private stockVaccine: StockvaccineService,
@@ -19,11 +30,9 @@ export class InventoryComponent implements OnInit {
   ngOnInit(): void {
     this.stockVaccine.getAllVaccines().subscribe({
       next: (vaccineStock) => {
-        console.log(vaccineStock);
         this.vaccineStock = vaccineStock;
       },
       error: (response) => {
-        console.log(response);
         this.toastr.error('Failed to fetch data', 'Error!');
       },
     });
