@@ -14,6 +14,7 @@ namespace VaccineMgmtAPIDb.Controllers
         {
             _appDbContext = appDbContext;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllVaccines()
         {

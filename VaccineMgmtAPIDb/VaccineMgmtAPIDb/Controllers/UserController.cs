@@ -71,6 +71,11 @@ namespace VaccineMgmtAPIDb.Controllers
             {
                 return BadRequest(new { Message = "Email already exists!" });
             }
+            //Check Email Format
+            if (!await IsEmailValid(userObj.Email))
+            {
+                return BadRequest(new { Message = "Format of your Email should be correct" });
+            }
             //Check Password Strength
             var pass = CheckPasswordStrength(userObj.Password);
             if(!string.IsNullOrEmpty(pass))
@@ -90,8 +95,14 @@ namespace VaccineMgmtAPIDb.Controllers
         }
         private Task<bool>CheckUserNameExistAsync(string userName)
             => _authContext.Users.AnyAsync(x => x.UserName == userName);
-        private Task<bool> CheckEmailExistAsync(string email)
+        
+private Task<bool> CheckEmailExistAsync(string email)
             => _authContext.Users.AnyAsync(x => x.Email == email);
+        private Task<bool> IsEmailValid(string email)
+        {
+            string emailPattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
+            return Task.FromResult(Regex.IsMatch(email, emailPattern));
+        }
         private string CheckPasswordStrength(string password)
         {
             StringBuilder sb = new StringBuilder();
@@ -116,7 +127,8 @@ namespace VaccineMgmtAPIDb.Controllers
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Role, user.Role),
-                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}")
+                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                new Claim("userName", user.UserName)
             });
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
             var tokenDescriptor = new SecurityTokenDescriptor

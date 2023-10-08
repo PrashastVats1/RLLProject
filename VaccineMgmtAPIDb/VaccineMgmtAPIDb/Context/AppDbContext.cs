@@ -15,5 +15,7 @@ namespace VaccineMgmtAPIDb.Context
             modelBuilder.Entity<User>().ToTable("users");
         }
         public DbSet<VaccineMgmtAPIDb.Models.VaccineStock> VaccineStock { get; set; }
+        public DbSet<VaccineMgmtAPIDb.Models.VaccineCenter> VaccineCenter { get; set; }
+        public DbSet<VaccineMgmtAPIDb.Models.BookingSlot> BookingSlot { get; set; }
     }
 }
