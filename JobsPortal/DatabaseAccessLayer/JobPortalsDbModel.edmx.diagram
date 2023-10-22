@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="adeef02933f646c380ba6ef9ea245f62" Name="Diagram1">
+      <Diagram DiagramId="68cbf0e54e144e9f98fde6882bbbde8d" Name="Diagram1">
         <EntityTypeShape EntityType="JobsPortalDbModel.CompanyTable" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsPortalDbModel.EmployeesTable" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsPortalDbModel.JobCategoryTable" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsPortalDbModel.JobNatureTable" Width="1.5" PointX="3.75" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="JobsPortalDbModel.JobRequirementDetailsTable" Width="1.5" PointX="10.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JobsPortalDbModel.JobRequirementsTable" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsPortalDbModel.JobRequirementDetailsTable" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsPortalDbModel.JobRequirementsTable" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsPortalDbModel.JobStatusTable" Width="1.5" PointX="3.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JobsPortalDbModel.PostJobTable" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsPortalDbModel.PostJobTable" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsPortalDbModel.ResumeTable" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsPortalDbModel.UserTable" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsPortalDbModel.UserTypeTable" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
@@ -24,8 +24,7 @@
         <AssociationConnector Association="JobsPortalDbModel.FK_PostJobTable_JobCategoryTable" ManuallyRouted="false" />
         <AssociationConnector Association="JobsPortalDbModel.FK_PostJobTable_JobNatureTable" ManuallyRouted="false" />
         <AssociationConnector Association="JobsPortalDbModel.FK_JobRequirementDetailsTable_JobRequirementsTable" ManuallyRouted="false" />
-        <AssociationConnector Association="JobsPortalDbModel.FK_JobRequirementsTable_PostJobTable" ManuallyRouted="false" />
-        <AssociationConnector Association="JobsPortalDbModel.FK_PostJobTable_JobRequirementsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsPortalDbModel.FK_JobRequirementDetailsTable_PostJobTable" ManuallyRouted="false" />
         <AssociationConnector Association="JobsPortalDbModel.FK_PostJobTable_JobStatusTable" ManuallyRouted="false" />
         <AssociationConnector Association="JobsPortalDbModel.FK_PostJobTable_UserTable" ManuallyRouted="false" />
         <AssociationConnector Association="JobsPortalDbModel.FK_UserTypeTable_UserTable" ManuallyRouted="false" />

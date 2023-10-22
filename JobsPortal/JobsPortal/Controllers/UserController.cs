@@ -128,7 +128,10 @@ namespace JobsPortal.Controllers
                 {
                     Session["CompanyID"] = user.CompanyTables.FirstOrDefault().CompanyID;
                 }
-
+                if (user.UserTypeID == 3)
+                {
+                    Session["EmployeeID"] = user.EmployeesTables.FirstOrDefault().EmployeeID;
+                }
                 return RedirectToAction("Index", "Home");
             }
             return View(userLoginMV);
@@ -139,6 +142,7 @@ namespace JobsPortal.Controllers
             Session["UserID"] = string.Empty;
             Session["UserName"] = string.Empty;
             Session["CompanyID"] = string.Empty;
+            Session["EmployeeID"] = string.Empty;
             Session["UserTypeID"] = string.Empty;
             return RedirectToAction("Index", "Home");
         }

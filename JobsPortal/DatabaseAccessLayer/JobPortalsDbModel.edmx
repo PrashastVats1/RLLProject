@@ -60,6 +60,7 @@
           <Property Name="JobRequirementDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="JobRequirementID" Type="int" Nullable="false" />
           <Property Name="JobRequirementDetails" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="PostJobID" Type="int" />
         </EntityType>
         <EntityType Name="JobRequirementsTable">
           <Key>
@@ -67,7 +68,6 @@
           </Key>
           <Property Name="JobRequirementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="JobRequirement" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="PostJobID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="JobStatusTable">
           <Key>
@@ -175,14 +175,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobRequirementsTable_PostJobTable">
-          <End Role="PostJobTable" Type="Self.PostJobTable" Multiplicity="1" />
-          <End Role="JobRequirementsTable" Type="Self.JobRequirementsTable" Multiplicity="*" />
+        <Association Name="FK_JobRequirementDetailsTable_PostJobTable">
+          <End Role="PostJobTable" Type="Self.PostJobTable" Multiplicity="0..1" />
+          <End Role="JobRequirementDetailsTable" Type="Self.JobRequirementDetailsTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PostJobTable">
               <PropertyRef Name="PostJobID" />
             </Principal>
-            <Dependent Role="JobRequirementsTable">
+            <Dependent Role="JobRequirementDetailsTable">
               <PropertyRef Name="PostJobID" />
             </Dependent>
           </ReferentialConstraint>
@@ -220,18 +220,6 @@
             </Principal>
             <Dependent Role="PostJobTable">
               <PropertyRef Name="JobNatureID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostJobTable_JobRequirementsTable">
-          <End Role="JobRequirementsTable" Type="Self.JobRequirementsTable" Multiplicity="1" />
-          <End Role="PostJobTable" Type="Self.PostJobTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobRequirementsTable">
-              <PropertyRef Name="JobRequirementID" />
-            </Principal>
-            <Dependent Role="PostJobTable">
-              <PropertyRef Name="JobRequirementID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -311,9 +299,9 @@
             <End Role="JobRequirementsTable" EntitySet="JobRequirementsTable" />
             <End Role="JobRequirementDetailsTable" EntitySet="JobRequirementDetailsTable" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobRequirementsTable_PostJobTable" Association="Self.FK_JobRequirementsTable_PostJobTable">
+          <AssociationSet Name="FK_JobRequirementDetailsTable_PostJobTable" Association="Self.FK_JobRequirementDetailsTable_PostJobTable">
             <End Role="PostJobTable" EntitySet="PostJobTable" />
-            <End Role="JobRequirementsTable" EntitySet="JobRequirementsTable" />
+            <End Role="JobRequirementDetailsTable" EntitySet="JobRequirementDetailsTable" />
           </AssociationSet>
           <AssociationSet Name="FK_PostJobTable_CompanyTable" Association="Self.FK_PostJobTable_CompanyTable">
             <End Role="CompanyTable" EntitySet="CompanyTable" />
@@ -325,10 +313,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_PostJobTable_JobNatureTable" Association="Self.FK_PostJobTable_JobNatureTable">
             <End Role="JobNatureTable" EntitySet="JobNatureTable" />
-            <End Role="PostJobTable" EntitySet="PostJobTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostJobTable_JobRequirementsTable" Association="Self.FK_PostJobTable_JobRequirementsTable">
-            <End Role="JobRequirementsTable" EntitySet="JobRequirementsTable" />
             <End Role="PostJobTable" EntitySet="PostJobTable" />
           </AssociationSet>
           <AssociationSet Name="FK_PostJobTable_JobStatusTable" Association="Self.FK_PostJobTable_JobStatusTable">
@@ -416,7 +400,9 @@
           <Property Name="JobRequirementDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="JobRequirementID" Type="Int32" Nullable="false" />
           <Property Name="JobRequirementDetails" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostJobID" Type="Int32" />
           <NavigationProperty Name="JobRequirementsTable" Relationship="Self.FK_JobRequirementDetailsTable_JobRequirementsTable" FromRole="JobRequirementDetailsTable" ToRole="JobRequirementsTable" />
+          <NavigationProperty Name="PostJobTable" Relationship="Self.FK_JobRequirementDetailsTable_PostJobTable" FromRole="JobRequirementDetailsTable" ToRole="PostJobTable" />
         </EntityType>
         <EntityType Name="JobRequirementsTable">
           <Key>
@@ -424,10 +410,7 @@
           </Key>
           <Property Name="JobRequirementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="JobRequirement" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PostJobID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="JobRequirementDetailsTables" Relationship="Self.FK_JobRequirementDetailsTable_JobRequirementsTable" FromRole="JobRequirementsTable" ToRole="JobRequirementDetailsTable" />
-          <NavigationProperty Name="PostJobTable" Relationship="Self.FK_JobRequirementsTable_PostJobTable" FromRole="JobRequirementsTable" ToRole="PostJobTable" />
-          <NavigationProperty Name="PostJobTables" Relationship="Self.FK_PostJobTable_JobRequirementsTable" FromRole="JobRequirementsTable" ToRole="PostJobTable" />
         </EntityType>
         <EntityType Name="JobStatusTable">
           <Key>
@@ -462,8 +445,7 @@
           <NavigationProperty Name="CompanyTable" Relationship="Self.FK_PostJobTable_CompanyTable" FromRole="PostJobTable" ToRole="CompanyTable" />
           <NavigationProperty Name="JobCategoryTable" Relationship="Self.FK_PostJobTable_JobCategoryTable" FromRole="PostJobTable" ToRole="JobCategoryTable" />
           <NavigationProperty Name="JobNatureTable" Relationship="Self.FK_PostJobTable_JobNatureTable" FromRole="PostJobTable" ToRole="JobNatureTable" />
-          <NavigationProperty Name="JobRequirementsTables" Relationship="Self.FK_JobRequirementsTable_PostJobTable" FromRole="PostJobTable" ToRole="JobRequirementsTable" />
-          <NavigationProperty Name="JobRequirementsTable" Relationship="Self.FK_PostJobTable_JobRequirementsTable" FromRole="PostJobTable" ToRole="JobRequirementsTable" />
+          <NavigationProperty Name="JobRequirementDetailsTables" Relationship="Self.FK_JobRequirementDetailsTable_PostJobTable" FromRole="PostJobTable" ToRole="JobRequirementDetailsTable" />
           <NavigationProperty Name="JobStatusTable" Relationship="Self.FK_PostJobTable_JobStatusTable" FromRole="PostJobTable" ToRole="JobStatusTable" />
           <NavigationProperty Name="UserTable" Relationship="Self.FK_PostJobTable_UserTable" FromRole="PostJobTable" ToRole="UserTable" />
         </EntityType>
@@ -597,27 +579,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobRequirementsTable_PostJobTable">
-          <End Role="PostJobTable" Type="Self.PostJobTable" Multiplicity="1" />
-          <End Role="JobRequirementsTable" Type="Self.JobRequirementsTable" Multiplicity="*" />
+        <Association Name="FK_JobRequirementDetailsTable_PostJobTable">
+          <End Role="PostJobTable" Type="Self.PostJobTable" Multiplicity="0..1" />
+          <End Role="JobRequirementDetailsTable" Type="Self.JobRequirementDetailsTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PostJobTable">
               <PropertyRef Name="PostJobID" />
             </Principal>
-            <Dependent Role="JobRequirementsTable">
+            <Dependent Role="JobRequirementDetailsTable">
               <PropertyRef Name="PostJobID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostJobTable_JobRequirementsTable">
-          <End Role="JobRequirementsTable" Type="Self.JobRequirementsTable" Multiplicity="1" />
-          <End Role="PostJobTable" Type="Self.PostJobTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobRequirementsTable">
-              <PropertyRef Name="JobRequirementID" />
-            </Principal>
-            <Dependent Role="PostJobTable">
-              <PropertyRef Name="JobRequirementID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -701,13 +671,9 @@
             <End Role="JobRequirementsTable" EntitySet="JobRequirementsTables" />
             <End Role="JobRequirementDetailsTable" EntitySet="JobRequirementDetailsTables" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobRequirementsTable_PostJobTable" Association="Self.FK_JobRequirementsTable_PostJobTable">
+          <AssociationSet Name="FK_JobRequirementDetailsTable_PostJobTable" Association="Self.FK_JobRequirementDetailsTable_PostJobTable">
             <End Role="PostJobTable" EntitySet="PostJobTables" />
-            <End Role="JobRequirementsTable" EntitySet="JobRequirementsTables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostJobTable_JobRequirementsTable" Association="Self.FK_PostJobTable_JobRequirementsTable">
-            <End Role="JobRequirementsTable" EntitySet="JobRequirementsTables" />
-            <End Role="PostJobTable" EntitySet="PostJobTables" />
+            <End Role="JobRequirementDetailsTable" EntitySet="JobRequirementDetailsTables" />
           </AssociationSet>
           <AssociationSet Name="FK_PostJobTable_JobStatusTable" Association="Self.FK_PostJobTable_JobStatusTable">
             <End Role="JobStatusTable" EntitySet="JobStatusTables" />
@@ -786,6 +752,7 @@
                 <ScalarProperty Name="JobRequirementDetailsID" ColumnName="JobRequirementDetailsID" />
                 <ScalarProperty Name="JobRequirementID" ColumnName="JobRequirementID" />
                 <ScalarProperty Name="JobRequirementDetails" ColumnName="JobRequirementDetails" />
+                <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -794,7 +761,6 @@
               <MappingFragment StoreEntitySet="JobRequirementsTable">
                 <ScalarProperty Name="JobRequirementID" ColumnName="JobRequirementID" />
                 <ScalarProperty Name="JobRequirement" ColumnName="JobRequirement" />
-                <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

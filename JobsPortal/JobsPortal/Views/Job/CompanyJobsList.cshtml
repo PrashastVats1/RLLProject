@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DatabaseAccessLayer.PostJobTable>
+
+@{
+    ViewBag.Title = "CompanyJobsList";
+}
+
+<style>
+    /* Adding some basic styling for better spacing and alignment */
+    .table-head > div,
+    .table-row > div {
+        padding: 8px 15px;
+    }
+
+    .serial {
+        width: 50px;
+        text-align: center;
+    }
+
+    /* Ensuring each row is a flex container for flex properties to take effect */
+    .table-head, .table-row {
+        display: flex;
+    }
+
+    /* Assign weights to columns */
+    .jobTitle, .jobDescription, .companyName, .userName {
+        flex: 2;
+    }
+
+    .minSalary, .maxSalary, .location, .vacancy, .postDate, .applicationDeadline, .lastDate, .jobRequirementID, .webUrl, .jobCategory, .jobNature, .jobStatus {
+        flex: 1;
+    }
+
+    .action {
+        flex: 1;
+    }
+</style>
+
+<div class="section-top-border col-md-10">
+    <h3 class="mb-30">Company Jobs List @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default", @style = "float:right; border-radius: 10px;" })</h3>
+    <div class="progress-table-wrap">
+        <div class="progress-table">
+            <div class="table-head">
+                <div class="jobTitle">Job Title</div>
+                <div class="jobDescription">Description</div>
+                <div class="minSalary">Min Salary</div>
+                <div class="maxSalary">Max Salary</div>
+                <div class="location">Location</div>
+                <div class="vacancy">Vacancy</div>
+                <div class="postDate">Post Date</div>
+                <div class="applicationDeadline">Application Deadline</div>
+                <div class="webUrl">Web URL</div>
+                <div class="jobCategory">Job Category</div>
+                <div class="jobNature">Job Nature</div>
+                <div class="jobStatus">Job Status</div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="table-row">
+                    <div class="jobTitle">@Html.DisplayFor(modelItem => item.JobTitle)</div>
+                    <div class="jobDescription">@Html.DisplayFor(modelItem => item.JobDescription)</div>
+                    <div class="minSalary">@Html.DisplayFor(modelItem => item.MinSalary)</div>
+                    <div class="maxSalary">@Html.DisplayFor(modelItem => item.MaxSalary)</div>
+                    <div class="location">@Html.DisplayFor(modelItem => item.Location)</div>
+                    <div class="vacancy">@Html.DisplayFor(modelItem => item.Vacancy)</div>
+                    <div class="postDate">@Html.DisplayFor(modelItem => item.PostDate)</div>
+                    <div class="applicationDeadline">@Html.DisplayFor(modelItem => item.ApplicationDeadline)</div>
+                    <div class="lastDate">@Html.DisplayFor(modelItem => item.LastDate)</div>
+                    <div class="webUrl">@Html.DisplayFor(modelItem => item.WebUrl)</div>
+                    <div class="jobCategory">@Html.DisplayFor(modelItem => item.JobCategoryTable.JobCategory)</div>
+                    <div class="jobNature">@Html.DisplayFor(modelItem => item.JobNatureTable.JobNature)</div>
+                    <div class="jobStatus">@Html.DisplayFor(modelItem => item.JobStatusTable.JobStatus)</div>
+                    <div class="action">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PostJobID }, new { @class = "genric-btn primary circle" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.PostJobID }, new { @class = "genric-btn primary circle" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PostJobID }, new { @class = "genric-btn primary circle" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

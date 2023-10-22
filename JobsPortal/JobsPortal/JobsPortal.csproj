@@ -279,6 +279,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobCategoryTablesController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobNatureTablesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -286,6 +287,7 @@
     </Compile>
     <Compile Include="Models\CompanyMV.cs" />
     <Compile Include="Models\EmployeeMV.cs" />
+    <Compile Include="Models\PostJobMV.cs" />
     <Compile Include="Models\UserLoginMV.cs" />
     <Compile Include="Models\UserMV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -376,6 +378,8 @@
     <Content Include="Scripts\jquery-3.7.1.min.map" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\AllUsers.cshtml" />
+    <Content Include="Views\Job\PostJob.cshtml" />
+    <Content Include="Views\Job\CompanyJobsList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
