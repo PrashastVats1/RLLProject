@@ -285,8 +285,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Email.cs" />
     <Compile Include="Models\CompanyMV.cs" />
     <Compile Include="Models\EmployeeMV.cs" />
+    <Compile Include="Models\FilterJobMV.cs" />
+    <Compile Include="Models\ForgotPasswordMV.cs" />
+    <Compile Include="Models\JobReqMV.cs" />
+    <Compile Include="Models\JobRequirementDetailsMV.cs" />
+    <Compile Include="Models\JobRequirementsMV.cs" />
+    <Compile Include="Models\PostJobDetailMV.cs" />
     <Compile Include="Models\PostJobMV.cs" />
     <Compile Include="Models\UserLoginMV.cs" />
     <Compile Include="Models\UserMV.cs" />
@@ -380,6 +387,11 @@
     <Content Include="Views\User\AllUsers.cshtml" />
     <Content Include="Views\Job\PostJob.cshtml" />
     <Content Include="Views\Job\CompanyJobsList.cshtml" />
+    <Content Include="Views\Job\AddJobReq.cshtml" />
+    <Content Include="Views\Job\JobDetails.cshtml" />
+    <Content Include="Views\Job\AllCompanyPendingJobs.cshtml" />
+    <Content Include="Views\Job\FilterJob.cshtml" />
+    <Content Include="Views\User\Forgot.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

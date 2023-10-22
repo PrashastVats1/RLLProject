@@ -53,16 +53,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="JobRequirementDetailsTables">
-      <EntityTypeMapping TypeName="JobsPortalDbModel.JobRequirementDetailsTable">
-        <MappingFragment StoreEntitySet="JobRequirementDetailsTable">
-          <ScalarProperty Name="JobRequirementDetailsID" ColumnName="JobRequirementDetailsID" />
-          <ScalarProperty Name="JobRequirementID" ColumnName="JobRequirementID" />
-          <ScalarProperty Name="JobRequirementDetails" ColumnName="JobRequirementDetails" />
-          <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="JobRequirementsTables">
       <EntityTypeMapping TypeName="JobsPortalDbModel.JobRequirementsTable">
         <MappingFragment StoreEntitySet="JobRequirementsTable">
@@ -77,29 +67,6 @@
           <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
           <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
           <ScalarProperty Name="StatusMessage" ColumnName="StatusMessage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PostJobTables">
-      <EntityTypeMapping TypeName="JobsPortalDbModel.PostJobTable">
-        <MappingFragment StoreEntitySet="PostJobTable">
-          <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
-          <ScalarProperty Name="JobCategoryID" ColumnName="JobCategoryID" />
-          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-          <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
-          <ScalarProperty Name="MinSalary" ColumnName="MinSalary" />
-          <ScalarProperty Name="MaxSalary" ColumnName="MaxSalary" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="Vacancy" ColumnName="Vacancy" />
-          <ScalarProperty Name="JobNatureID" ColumnName="JobNatureID" />
-          <ScalarProperty Name="PostDate" ColumnName="PostDate" />
-          <ScalarProperty Name="ApplicationDeadline" ColumnName="ApplicationDeadline" />
-          <ScalarProperty Name="LastDate" ColumnName="LastDate" />
-          <ScalarProperty Name="JobRequirementID" ColumnName="JobRequirementID" />
-          <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
-          <ScalarProperty Name="WebUrl" ColumnName="WebUrl" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -131,6 +98,38 @@
         <MappingFragment StoreEntitySet="UserTypeTable">
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
           <ScalarProperty Name="UserType" ColumnName="UserType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostJobTables">
+      <EntityTypeMapping TypeName="JobsPortalDbModel.PostJobTable">
+        <MappingFragment StoreEntitySet="PostJobTable">
+          <ScalarProperty Name="WebUrl" ColumnName="WebUrl" />
+          <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
+          <ScalarProperty Name="LastDate" ColumnName="LastDate" />
+          <ScalarProperty Name="ApplicationDeadline" ColumnName="ApplicationDeadline" />
+          <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+          <ScalarProperty Name="JobNatureID" ColumnName="JobNatureID" />
+          <ScalarProperty Name="Vacancy" ColumnName="Vacancy" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="MaxSalary" ColumnName="MaxSalary" />
+          <ScalarProperty Name="MinSalary" ColumnName="MinSalary" />
+          <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="JobCategoryID" ColumnName="JobCategoryID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobRequirementDetailsTables">
+      <EntityTypeMapping TypeName="JobsPortalDbModel.JobRequirementDetailsTable">
+        <MappingFragment StoreEntitySet="JobRequirementDetailsTable">
+          <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
+          <ScalarProperty Name="JobRequirementDetails" ColumnName="JobRequirementDetails" />
+          <ScalarProperty Name="JobRequirementID" ColumnName="JobRequirementID" />
+          <ScalarProperty Name="JobRequirementDetailsID" ColumnName="JobRequirementDetailsID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

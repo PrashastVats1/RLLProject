@@ -157,5 +157,42 @@ namespace JobsPortal.Controllers
             var users = db.UserTables.ToList();
             return View(users);
         }
+
+        //Forgot Password
+        public ActionResult Forgot()
+        {
+            return View(new ForgotPasswordMV());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Forgot(ForgotPasswordMV forgotPasswordMV)
+        {
+            if (forgotPasswordMV == null)
+                return View();
+
+            var user = db.UserTables.Where(u => u.EmailAddress == forgotPasswordMV.Email).FirstOrDefault();
+            if (user != null)
+            {
+                string userandpassword = "User Name: " + user.UserName + "\n" + "Password: " + user.Password;
+                string body = userandpassword;
+
+                bool IsSendEmail = JobsPortal.Helper.Email.Emailsend(user.EmailAddress, "Account Details", body, true);
+                if (IsSendEmail)
+                {
+                    ModelState.AddModelError(string.Empty, "Username and Password is sent!");
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "Your Email is Registered! Current email sending is not working properly, please try again after some time ");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Email", "Email is not registered");
+            }
+            return View(forgotPasswordMV);
+        }
+
     }
 }

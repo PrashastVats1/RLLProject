@@ -90,7 +90,6 @@
     <Property Name="PostDate" Type="date" Nullable="false" />
     <Property Name="ApplicationDeadline" Type="date" Nullable="false" />
     <Property Name="LastDate" Type="date" Nullable="false" />
-    <Property Name="JobRequirementID" Type="int" Nullable="false" />
     <Property Name="JobStatusID" Type="int" Nullable="false" />
     <Property Name="WebUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
   </EntityType>
@@ -159,7 +158,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_JobRequirementDetailsTable_JobRequirementsTable">
-    <End Role="JobRequirementsTable" Type="Self.JobRequirementsTable" Multiplicity="1" />
+    <End Role="JobRequirementsTable" Type="Self.JobRequirementsTable" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="JobRequirementDetailsTable" Type="Self.JobRequirementDetailsTable" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="JobRequirementsTable">
