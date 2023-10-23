@@ -19,19 +19,21 @@
     </Key>
     <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="JobCategoryID" Type="int" Nullable="false" />
     <Property Name="EmployeeName" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="DOB" Type="date" Nullable="false" />
-    <Property Name="Education" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="WorkExperience" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Skills" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="Education" Type="varchar" MaxLength="200" />
+    <Property Name="WorkExperience" Type="varchar" MaxLength="500" />
+    <Property Name="Skills" Type="nvarchar" MaxLength="500" />
     <Property Name="EmailAddress" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="Gender" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Photo" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Qualification" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="PermanentAddress" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="Qualification" Type="nvarchar" MaxLength="150" />
+    <Property Name="PermanentAddress" Type="nvarchar" MaxLength="500" />
     <Property Name="JobReference" Type="nvarchar" MaxLength="250" />
     <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ResumeName" Type="nvarchar" MaxLength="255" />
+    <Property Name="ResumeData" Type="varbinary(max)" />
+    <Property Name="ResumeType" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="JobCategoryTable">
     <Key>
@@ -93,16 +95,6 @@
     <Property Name="JobStatusID" Type="int" Nullable="false" />
     <Property Name="WebUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
   </EntityType>
-  <EntityType Name="ResumeTable">
-    <Key>
-      <PropertyRef Name="ResumeID" />
-    </Key>
-    <Property Name="ResumeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EmployeeID" Type="int" />
-    <Property Name="FileName" Type="nvarchar" MaxLength="255" />
-    <Property Name="FileData" Type="varbinary(max)" />
-    <Property Name="ContentType" Type="nvarchar" MaxLength="1000" />
-  </EntityType>
   <EntityType Name="UserTable">
     <Key>
       <PropertyRef Name="UserID" />
@@ -130,18 +122,6 @@
       </Principal>
       <Dependent Role="CompanyTable">
         <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EmployeesTable_JobCategoryTable">
-    <End Role="JobCategoryTable" Type="Self.JobCategoryTable" Multiplicity="1" />
-    <End Role="EmployeesTable" Type="Self.EmployeesTable" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="JobCategoryTable">
-        <PropertyRef Name="JobCategoryID" />
-      </Principal>
-      <Dependent Role="EmployeesTable">
-        <PropertyRef Name="JobCategoryID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -243,18 +223,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ResumeTable_EmployeesTable">
-    <End Role="EmployeesTable" Type="Self.EmployeesTable" Multiplicity="0..1" />
-    <End Role="ResumeTable" Type="Self.ResumeTable" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeesTable">
-        <PropertyRef Name="EmployeeID" />
-      </Principal>
-      <Dependent Role="ResumeTable">
-        <PropertyRef Name="EmployeeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_UserTypeTable_UserTable">
     <End Role="UserTypeTable" Type="Self.UserTypeTable" Multiplicity="1" />
     <End Role="UserTable" Type="Self.UserTable" Multiplicity="*" />
@@ -276,16 +244,11 @@
     <EntitySet Name="JobRequirementsTable" EntityType="Self.JobRequirementsTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JobStatusTable" EntityType="Self.JobStatusTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PostJobTable" EntityType="Self.PostJobTable" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ResumeTable" EntityType="Self.ResumeTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserTypeTable" EntityType="Self.UserTypeTable" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CompanyTable_UserTable" Association="Self.FK_CompanyTable_UserTable">
       <End Role="UserTable" EntitySet="UserTable" />
       <End Role="CompanyTable" EntitySet="CompanyTable" />
-    </AssociationSet>
-    <AssociationSet Name="FK_EmployeesTable_JobCategoryTable" Association="Self.FK_EmployeesTable_JobCategoryTable">
-      <End Role="JobCategoryTable" EntitySet="JobCategoryTable" />
-      <End Role="EmployeesTable" EntitySet="EmployeesTable" />
     </AssociationSet>
     <AssociationSet Name="FK_EmployeesTable_UserTable" Association="Self.FK_EmployeesTable_UserTable">
       <End Role="UserTable" EntitySet="UserTable" />
@@ -318,10 +281,6 @@
     <AssociationSet Name="FK_PostJobTable_UserTable" Association="Self.FK_PostJobTable_UserTable">
       <End Role="UserTable" EntitySet="UserTable" />
       <End Role="PostJobTable" EntitySet="PostJobTable" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ResumeTable_EmployeesTable" Association="Self.FK_ResumeTable_EmployeesTable">
-      <End Role="EmployeesTable" EntitySet="EmployeesTable" />
-      <End Role="ResumeTable" EntitySet="ResumeTable" />
     </AssociationSet>
     <AssociationSet Name="FK_UserTypeTable_UserTable" Association="Self.FK_UserTypeTable_UserTable">
       <End Role="UserTypeTable" EntitySet="UserTypeTable" />

@@ -40,9 +40,9 @@ namespace DatabaseAccessLayer
         public virtual CompanyTable CompanyTable { get; set; }
         public virtual JobCategoryTable JobCategoryTable { get; set; }
         public virtual JobNatureTable JobNatureTable { get; set; }
-        public virtual JobStatusTable JobStatusTable { get; set; }
-        public virtual UserTable UserTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobRequirementDetailsTable> JobRequirementDetailsTables { get; set; }
+        public virtual JobStatusTable JobStatusTable { get; set; }
+        public virtual UserTable UserTable { get; set; }
     }
 }

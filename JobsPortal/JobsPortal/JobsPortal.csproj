@@ -281,6 +281,7 @@
     <Compile Include="Controllers\JobCategoryTablesController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobNatureTablesController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -392,6 +393,8 @@
     <Content Include="Views\Job\AllCompanyPendingJobs.cshtml" />
     <Content Include="Views\Job\FilterJob.cshtml" />
     <Content Include="Views\User\Forgot.cshtml" />
+    <Content Include="Views\UserProfile\MyProfile.cshtml" />
+    <Content Include="Views\UserProfile\UserProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

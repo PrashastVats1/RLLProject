@@ -90,9 +90,6 @@
       <DependentUpon>JobPortalsDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResumeTable.cs">
-      <DependentUpon>JobPortalsDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="UserTable.cs">
       <DependentUpon>JobPortalsDbModel.tt</DependentUpon>
     </Compile>

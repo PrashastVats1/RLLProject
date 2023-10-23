@@ -14,17 +14,10 @@ namespace DatabaseAccessLayer
     
     public partial class EmployeesTable
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EmployeesTable()
-        {
-            this.ResumeTables = new HashSet<ResumeTable>();
-        }
-    
         public int EmployeeID { get; set; }
         public int UserId { get; set; }
-        public int JobCategoryID { get; set; }
         public string EmployeeName { get; set; }
-        public System.DateTime DOB { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
         public string Education { get; set; }
         public string WorkExperience { get; set; }
         public string Skills { get; set; }
@@ -35,10 +28,10 @@ namespace DatabaseAccessLayer
         public string PermanentAddress { get; set; }
         public string JobReference { get; set; }
         public string Description { get; set; }
+        public string ResumeName { get; set; }
+        public byte[] ResumeData { get; set; }
+        public string ResumeType { get; set; }
     
-        public virtual JobCategoryTable JobCategoryTable { get; set; }
         public virtual UserTable UserTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ResumeTable> ResumeTables { get; set; }
     }
 }

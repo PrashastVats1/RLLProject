@@ -17,7 +17,6 @@ namespace DatabaseAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JobCategoryTable()
         {
-            this.EmployeesTables = new HashSet<EmployeesTable>();
             this.PostJobTables = new HashSet<PostJobTable>();
         }
     
@@ -25,8 +24,6 @@ namespace DatabaseAccessLayer
         public string JobCategory { get; set; }
         public string Description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeesTable> EmployeesTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostJobTable> PostJobTables { get; set; }
     }

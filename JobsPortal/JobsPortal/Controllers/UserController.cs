@@ -89,6 +89,35 @@ namespace JobsPortal.Controllers
                             db.CompanyTables.Add(company);
                             db.SaveChanges();
                         }
+                        else if(userMV.AreYouProvider != true)
+                        {
+                            var employee = new EmployeesTable();
+                            employee.UserId = user.UserID;
+                            if (string.IsNullOrEmpty(userMV.Employee.EmailAddress))
+                            {
+                                transact.Rollback();
+                                ModelState.AddModelError("Employee.EmailAddress", "*Required");
+                                return View(userMV);
+                            }
+                            if (string.IsNullOrEmpty(userMV.Employee.EmployeeName))
+                            {
+                                transact.Rollback();
+                                ModelState.AddModelError("Employee.EmployeeName", "*Required");
+                                return View(userMV);
+                            }
+                            if (string.IsNullOrEmpty(userMV.Employee.Gender))
+                            {
+                                transact.Rollback();
+                                ModelState.AddModelError("Employee.Gender", "*Required");
+                                return View(userMV);
+                            }
+                            employee.EmailAddress = userMV.Employee.EmailAddress;
+                            employee.EmployeeName = userMV.Employee.EmployeeName;
+                            employee.Gender = userMV.Employee.Gender;
+                            employee.Photo = "~/Content/assests/img/adapt_icon/3.png";
+                            db.EmployeesTables.Add(employee);
+                            db.SaveChanges();
+                        }
                         transact.Commit();
                         return RedirectToAction("Login");
                     }

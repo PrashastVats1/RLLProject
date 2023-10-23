@@ -8,6 +8,7 @@ namespace JobsPortal.Models
         public UserMV()
         {
             Company = new CompanyMV();
+            Employee = new EmployeeMV();
         }
 
         public int UserID { get; set; }
@@ -32,5 +33,6 @@ namespace JobsPortal.Models
         public string ContactNo { get; set; }
         public bool AreYouProvider {  get; set; }
         public CompanyMV Company { get; set; }
+        public EmployeeMV Employee { get; set; }
     }
 }
