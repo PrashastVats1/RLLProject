@@ -77,3 +77,5 @@ D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\obj\Debug\JobsPortal
 D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\obj\Debug\JobsPortal.csproj.CopyComplete
 D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\obj\Debug\JobsPortal.dll
 D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\obj\Debug\JobsPortal.pdb
+D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\bin\log4net.dll
+D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\bin\log4net.xml

@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 
 namespace JobsPortal.Controllers
 {
     public class JobController : Controller
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(JobController));
         private JobsPortalDbEntities db = new JobsPortalDbEntities();
         // GET: Job
         public ActionResult PostJob()
@@ -49,25 +51,38 @@ namespace JobsPortal.Controllers
 
             if(ModelState.IsValid)
             {
-                var post = new PostJobTable();
-                post.UserID = postJobMV.UserID;
-                post.CompanyID = postJobMV.CompanyID;
-                post.JobCategoryID = postJobMV.JobCategoryID;
-                post.JobTitle = postJobMV.JobTitle;
-                post.JobDescription = postJobMV.JobDescription;
-                post.MinSalary = postJobMV.MinSalary;
-                post.MaxSalary = postJobMV.MaxSalary;
-                post.Location = postJobMV.Location;
-                post.Vacancy = postJobMV.Vacancy;
-                post.JobNatureID = postJobMV.JobNatureID;
-                post.PostDate = DateTime.Now;
-                post.ApplicationDeadline = postJobMV.ApplicationDeadline;
-                post.LastDate = postJobMV.ApplicationDeadline;
-                post.JobStatusID = 1;
-                post.WebUrl = postJobMV.WebUrl;
-                db.PostJobTables.Add(post);
-                db.SaveChanges();
-                return RedirectToAction("CompanyJobsList");
+                try
+                {
+                    var post = new PostJobTable();
+                    post.UserID = postJobMV.UserID;
+                    post.CompanyID = postJobMV.CompanyID;
+                    post.JobCategoryID = postJobMV.JobCategoryID;
+                    post.JobTitle = postJobMV.JobTitle;
+                    post.JobDescription = postJobMV.JobDescription;
+                    post.MinSalary = postJobMV.MinSalary;
+                    post.MaxSalary = postJobMV.MaxSalary;
+                    post.Location = postJobMV.Location;
+                    post.Vacancy = postJobMV.Vacancy;
+                    post.JobNatureID = postJobMV.JobNatureID;
+                    post.PostDate = DateTime.Now;
+                    post.ApplicationDeadline = postJobMV.ApplicationDeadline;
+                    post.LastDate = postJobMV.ApplicationDeadline;
+                    post.JobStatusID = 1;
+                    post.WebUrl = postJobMV.WebUrl;
+                    db.PostJobTables.Add(post);
+                    db.SaveChanges();
+                    log.Info($"PostJob - Successfully posted job by UserID: {userId} and CompanyID: {companyId}");
+                    return RedirectToAction("CompanyJobsList");
+                }
+                catch (Exception ex)
+                {
+
+                    log.Error($"PostJob - Error while posting job by UserID: {userId}. Exception: {ex.Message}", ex);
+                }
+            }
+            else
+            {
+                log.Warn("PostJob - ModelState is invalid.");
             }
 
             ViewBag.JobCategoryID = new SelectList(
@@ -176,6 +191,7 @@ namespace JobsPortal.Controllers
             var requirements = db.JobRequirementDetailsTables.Find(id);
             db.Entry(requirements).State = System.Data.Entity.EntityState.Deleted;
             db.SaveChanges();
+            log.Info($"DeleteReq - Successfully deleted job requirement with ID: {id}");
             return RedirectToAction("AddJobReq", new {id=jobPostId});
         }
 
@@ -219,6 +235,10 @@ namespace JobsPortal.Controllers
 
         public ActionResult JobDetails(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserTypeID"])))
+            {
+                return RedirectToAction("Login", "User");
+            }
             var getpostJob = db.PostJobTables.Find(id);
             var postjob = new PostJobDetailMV();
             postjob.PostJobID = getpostJob.PostJobID;
@@ -310,6 +330,14 @@ namespace JobsPortal.Controllers
                                     "JobNature",
                                     filterJobMV.JobNatureID);
             return View(filterJobMV);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

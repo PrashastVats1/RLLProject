@@ -4,6 +4,12 @@
 }
 @section Styles {
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* CSS for changing cursor on hover */
+        .refresh-icon:hover {
+            cursor: pointer;
+        }
+    </style>
 }
 
 <div class="section-top-border">
@@ -62,6 +68,24 @@
                 </div>
 
                 <hr />
+                <div class="d-flex align-items-center">
+                    <h6>Refresh Captcha</h6>
+                    <div class="refresh-icon ml-2" onclick="cap()">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" readonly id="capt" style="font-size: 20px;">
+                    </div>
+                </div>
+                <label>Enter Captcha:</label>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="textinput">
+                    </div>
+                </div>
                 <div class="form-group mt-4">
                     <input type="submit" value="Login" class="genric-btn success e-large circle" style="float:right;" />
                     <a href="@Url.Content("~/User/Forgot")" class="btn-link">Forgot Password?</a>
@@ -73,6 +97,22 @@
 
 @section Scripts {
     <script>
+        // Moved out of the $(document).ready function for global access
+        function generateRandomString(length) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%^&*+';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Moved out of the $(document).ready function for global access
+        function cap() {
+            const captcha = generateRandomString(6);
+            document.getElementById("capt").value = captcha;
+        }
+
         $(document).ready(function () {
             $(".toggle-password").click(function () {
                 $(this).toggleClass("fa-eye fa-eye-slash");
@@ -83,6 +123,9 @@
                     input.attr("type", "password");
                 }
             });
+
+            // Call cap function when the document is ready
+            cap();
         });
     </script>
 }

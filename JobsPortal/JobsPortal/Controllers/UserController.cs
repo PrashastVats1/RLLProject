@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 
 namespace JobsPortal.Controllers
 {
     public class UserController : Controller
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(UserController));
         private JobsPortalDbEntities db = new JobsPortalDbEntities();
 
         // GET: User
@@ -119,12 +121,13 @@ namespace JobsPortal.Controllers
                             db.SaveChanges();
                         }
                         transact.Commit();
+                        log.Info($"New user with username {user.UserName} created successfully.");
                         return RedirectToAction("Login");
                     }
                     catch (Exception ex)
                     {
                         ModelState.AddModelError(string.Empty, "Please provide correct details!");
-                        Console.WriteLine(ex.ToString());
+                        log.Error("Error while creating new user.", ex);
                         transact.Rollback();
                     }                    
                 }
@@ -148,6 +151,7 @@ namespace JobsPortal.Controllers
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "User Name or Password are incorrect");
+                    log.Warn($"Login failed for username {userLoginMV.UserName}. Incorrect username or password.");
                     return View(userLoginMV);
                 }
                 Session["UserID"] = user.UserID;
@@ -159,8 +163,13 @@ namespace JobsPortal.Controllers
                 }
                 if (user.UserTypeID == 3)
                 {
-                    Session["EmployeeID"] = user.EmployeesTables.FirstOrDefault().EmployeeID;
+                    var employeeTableEntry = user.EmployeesTables.FirstOrDefault();
+                    if (employeeTableEntry != null)
+                    {
+                        Session["EmployeeID"] = employeeTableEntry.EmployeeID;
+                    }
                 }
+                log.Info($"User with username {user.UserName} logged in successfully.");
                 return RedirectToAction("Index", "Home");
             }
             return View(userLoginMV);
@@ -173,6 +182,7 @@ namespace JobsPortal.Controllers
             Session["CompanyID"] = string.Empty;
             Session["EmployeeID"] = string.Empty;
             Session["UserTypeID"] = string.Empty;
+            log.Info($"User logged out.");
             return RedirectToAction("Index", "Home");
         }
 
@@ -210,18 +220,28 @@ namespace JobsPortal.Controllers
                 if (IsSendEmail)
                 {
                     ModelState.AddModelError(string.Empty, "Username and Password is sent!");
+                    log.Info($"Password recovery email sent to {forgotPasswordMV.Email}.");
                 }
                 else
                 {
                     ModelState.AddModelError("Email", "Your Email is Registered! Current email sending is not working properly, please try again after some time ");
+                    log.Warn($"Failed to send password recovery email to {forgotPasswordMV.Email}.");
                 }
             }
             else
             {
                 ModelState.AddModelError("Email", "Email is not registered");
+                log.Warn($"Email is not registered. Email typed: {forgotPasswordMV.Email}.");
             }
             return View(forgotPasswordMV);
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

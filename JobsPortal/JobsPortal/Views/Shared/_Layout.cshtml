@@ -70,8 +70,9 @@
                                         <ul id="navigation">
                                             <li><a href="@Url.Content("~/Home/Index")">Home</a></li>
                                             <li><a href="@Url.Content("~/Job/FilterJob")">Find a Job</a></li>
-                                            @if(userTypeId != 1){
-                                            <li><a href="#">About</a></li>
+                                            @if (userTypeId != 1)
+                                            {
+                                                <li><a href="#">About</a></li>
                                             }
                                             @if (userTypeId == 1)
                                             {
@@ -97,8 +98,13 @@
                                                     <li> <a href="@Url.Content("~/Job/AllCompanyPendingJobs")"> All Companies Posts </a></li>
                                                 }
                                             }
-                                            @if(userTypeId != 1){
-                                            <li><a href="#">Contact</a></li>
+                                            @if (userTypeId != 1)
+                                            {
+                                                <li><a href="#">Contact</a></li>
+                                            }
+                                            @if (userTypeId == 3)
+                                            {
+                                                <li><a href="@Url.Content("~/EmployeesTables/Details")">My Profile</a></li>
                                             }
                                         </ul>
                                     </nav>
