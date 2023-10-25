@@ -31,9 +31,7 @@
     <Property Name="PermanentAddress" Type="nvarchar" MaxLength="500" />
     <Property Name="JobReference" Type="nvarchar" MaxLength="250" />
     <Property Name="Description" Type="nvarchar" MaxLength="4000" />
-    <Property Name="ResumeName" Type="nvarchar" MaxLength="255" />
-    <Property Name="ResumeData" Type="varbinary(max)" />
-    <Property Name="ResumeType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Resume" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="JobCategoryTable">
     <Key>

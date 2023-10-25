@@ -26,6 +26,7 @@ namespace DatabaseAccessLayer
         }
     
         public virtual DbSet<CompanyTable> CompanyTables { get; set; }
+        public virtual DbSet<EmployeesTable> EmployeesTables { get; set; }
         public virtual DbSet<JobCategoryTable> JobCategoryTables { get; set; }
         public virtual DbSet<JobNatureTable> JobNatureTables { get; set; }
         public virtual DbSet<JobRequirementDetailsTable> JobRequirementDetailsTables { get; set; }
@@ -34,6 +35,7 @@ namespace DatabaseAccessLayer
         public virtual DbSet<PostJobTable> PostJobTables { get; set; }
         public virtual DbSet<UserTable> UserTables { get; set; }
         public virtual DbSet<UserTypeTable> UserTypeTables { get; set; }
-        public virtual DbSet<EmployeesTable> EmployeesTables { get; set; }
+
+        public System.Data.Entity.DbSet<JobsPortal.ViewModels.JobApplicationEmailVM> JobApplicationEmailVMs { get; set; }
     }
 }

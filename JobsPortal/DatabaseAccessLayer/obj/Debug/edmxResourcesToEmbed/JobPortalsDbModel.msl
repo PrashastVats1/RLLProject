@@ -15,6 +15,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EmployeesTables">
+      <EntityTypeMapping TypeName="JobsPortalDbModel.EmployeesTable">
+        <MappingFragment StoreEntitySet="EmployeesTable">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Education" ColumnName="Education" />
+          <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
+          <ScalarProperty Name="Skills" ColumnName="Skills" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="JobReference" ColumnName="JobReference" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Resume" ColumnName="Resume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="JobCategoryTables">
       <EntityTypeMapping TypeName="JobsPortalDbModel.JobCategoryTable">
         <MappingFragment StoreEntitySet="JobCategoryTable">
@@ -98,29 +119,6 @@
         <MappingFragment StoreEntitySet="UserTypeTable">
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
           <ScalarProperty Name="UserType" ColumnName="UserType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EmployeesTables">
-      <EntityTypeMapping TypeName="JobsPortalDbModel.EmployeesTable">
-        <MappingFragment StoreEntitySet="EmployeesTable">
-          <ScalarProperty Name="ResumeType" ColumnName="ResumeType" />
-          <ScalarProperty Name="ResumeData" ColumnName="ResumeData" />
-          <ScalarProperty Name="ResumeName" ColumnName="ResumeName" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="JobReference" ColumnName="JobReference" />
-          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="Skills" ColumnName="Skills" />
-          <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
-          <ScalarProperty Name="Education" ColumnName="Education" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

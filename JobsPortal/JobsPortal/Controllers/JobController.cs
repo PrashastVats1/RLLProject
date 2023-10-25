@@ -71,7 +71,7 @@ namespace JobsPortal.Controllers
                     post.WebUrl = postJobMV.WebUrl;
                     db.PostJobTables.Add(post);
                     db.SaveChanges();
-                    log.Info($"PostJob - Successfully posted job by UserID: {userId} and CompanyID: {companyId}");
+                    log.Info($"PostJob - Successfully posted job by UserId: {userId} and CompanyID: {companyId}");
                     return RedirectToAction("CompanyJobsList");
                 }
                 catch (Exception ex)
@@ -295,6 +295,10 @@ namespace JobsPortal.Controllers
 
         public ActionResult FilterJob()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserTypeID"])))
+            {
+                return RedirectToAction("Login", "User");
+            }
             var obj = new FilterJobMV();
             var date = DateTime.Now;
             var result = db.PostJobTables.Where(r => r.ApplicationDeadline >= date && r.JobStatusID==2).ToList();

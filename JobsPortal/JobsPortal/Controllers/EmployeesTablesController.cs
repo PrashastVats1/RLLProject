@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using DatabaseAccessLayer;
+using JobsPortal.Models;
+using JobsPortal.ViewModels;
 using log4net;
 
 namespace JobsPortal.Controllers
@@ -15,7 +21,6 @@ namespace JobsPortal.Controllers
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(EmployeesTablesController));
         private JobsPortalDbEntities db = new JobsPortalDbEntities();
-
         // GET: EmployeesTables/Details
         public ActionResult Details()
         {
@@ -75,7 +80,7 @@ namespace JobsPortal.Controllers
         // POST: EmployeesTables/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeID,UserId,EmployeeName,DOB,Education,WorkExperience,Skills,EmailAddress,Gender,Photo,Qualification,PermanentAddress,JobReference,Description,ResumeName,ResumeData,ResumeType")] EmployeesTable employeesTable)
+        public ActionResult Edit([Bind(Include = "EmployeeID,UserId,EmployeeName,DOB,Education,WorkExperience,Skills,EmailAddress,Gender,Photo,Qualification,PermanentAddress,JobReference,Description,Resume")] EmployeesTable employeesTable, HttpPostedFileBase photo, HttpPostedFileBase file)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserTypeID"])))
             {
@@ -83,12 +88,129 @@ namespace JobsPortal.Controllers
             }
             if (ModelState.IsValid)
             {
+                // Photo Upload
+                if (photo != null && photo.ContentLength > 0)
+                {
+                    string photoname = Path.GetFileNameWithoutExtension(photo.FileName);
+                    string extension = Path.GetExtension(photo.FileName);
+                    string uniquePhotoname = $"{photoname}_{employeesTable.EmployeeID}{extension}";
+                    string photopath = Path.Combine(Server.MapPath("~/UploadImages/"), uniquePhotoname);
+                    photo.SaveAs(photopath);
+
+                    employeesTable.Photo = uniquePhotoname;
+                }
+
+                // Resume Upload
+                if (file != null && file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(file.FileName);
+                    string extension = Path.GetExtension(file.FileName);
+                    string uniqueFilename = $"{filename}_{employeesTable.EmployeeID}{extension}";
+                    string filepath = Path.Combine(Server.MapPath("~/UploadResumes/"), uniqueFilename);
+                    file.SaveAs(filepath);
+
+                    employeesTable.Resume = uniqueFilename;
+                }
                 db.Entry(employeesTable).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details");
             }
             ViewBag.UserId = new SelectList(db.UserTables, "UserID", "UserName", employeesTable.UserId);
             return View(employeesTable);
+        }
+
+        // GET: EmployeesTables/Apply
+        public ActionResult Apply()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserTypeID"])))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            log.Info("Apply action called");
+
+            int userId = 0;
+            int employeeId = 0;
+            int.TryParse(Convert.ToString(Session["UserID"]), out userId);
+            int.TryParse(Convert.ToString(Session["EmployeeID"]), out employeeId);
+
+            if (employeeId == 0)
+            {
+                log.Warn("EmployeeID session value is missing or zero");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            EmployeesTable employeesTable = db.EmployeesTables.Find(employeeId);
+            if (employeesTable == null)
+            {
+                log.Error($"Employee with ID {employeeId} not found");
+                return HttpNotFound();
+            }
+
+            // Convert the Employee data into the ViewModel.
+            JobApplicationEmailVM application = new JobApplicationEmailVM
+            {
+                EmployeeName = employeesTable.EmployeeName,
+                DOB = employeesTable.DOB,
+                Education = employeesTable.Education,
+                WorkExperience = employeesTable.WorkExperience,
+                Skills = employeesTable.Skills,
+                EmailAddress = employeesTable.EmailAddress,
+                Gender = employeesTable.Gender,
+                PhotoPath = employeesTable.Photo,
+                Qualification = employeesTable.Qualification,
+                PermanentAddress = employeesTable.PermanentAddress,
+                JobReference = employeesTable.JobReference,
+                Description = employeesTable.Description,
+                ResumePath = employeesTable.Resume,
+                CompanyEmail = "prashastvatsreborn@gmail.com"
+            };
+            return View(application); // This will be the view where they can review details and click a "Send Application" button.
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Apply(JobApplicationEmailVM application)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(application);
+            }
+
+            // Construct the email content using the ViewModel
+            string emailSubject = $"Job Application: {application.EmployeeName}";
+            string emailBody = $@"Employee Name: {application.EmployeeName}
+DOB: {application.DOB}
+Education: {application.Education}
+Work Experience: {application.WorkExperience}
+Skills: {application.Skills}
+Email Address: {application.EmailAddress}
+Gender: {application.Gender}
+Qualification: {application.Qualification}
+Permanent Address: {application.PermanentAddress}
+Job Reference: {application.JobReference}
+Description: {application.Description}";
+
+            // Optionally, if we want to attach the resume:
+            List<Attachment> attachments = new List<Attachment>();
+            if (!string.IsNullOrWhiteSpace(application.ResumePath))
+            {
+                attachments.Add(new Attachment(Server.MapPath("~/UploadResumes/" + application.ResumePath)));
+            }
+            
+            bool emailSent = JobsPortal.Helper.MailHelper.SendJobApplicationEmail(application.CompanyEmail, application.EmployeeName, Server.MapPath("~/UploadResumes/" + application.ResumePath), emailBody);
+
+            if (emailSent)
+            {
+                log.Info($"Job application email sent to {application.CompanyEmail}.");
+                TempData["Message"] = "Your job application has been sent successfully!";
+                return RedirectToAction("FilterJob", "Job");
+            }
+            else
+            {
+                log.Warn($"Failed to send job application email to {application.CompanyEmail}.");
+                ModelState.AddModelError("", "Failed to send job application. Please try again later.");
+                return View(application);
+            }
         }
 
         protected override void Dispose(bool disposing)

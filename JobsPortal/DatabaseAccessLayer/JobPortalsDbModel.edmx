@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="JobsPortalDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JobsPortalDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CompanyTable">
           <Key>
             <PropertyRef Name="CompanyID" />
@@ -36,9 +36,7 @@
           <Property Name="PermanentAddress" Type="nvarchar" MaxLength="500" />
           <Property Name="JobReference" Type="nvarchar" MaxLength="250" />
           <Property Name="Description" Type="nvarchar" MaxLength="4000" />
-          <Property Name="ResumeName" Type="nvarchar" MaxLength="255" />
-          <Property Name="ResumeData" Type="varbinary(max)" />
-          <Property Name="ResumeType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Resume" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="JobCategoryTable">
           <Key>
@@ -292,7 +290,8 @@
             <End Role="UserTable" EntitySet="UserTable" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JobsPortalDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -310,6 +309,27 @@
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserTable" Relationship="Self.FK_CompanyTable_UserTable" FromRole="CompanyTable" ToRole="UserTable" />
           <NavigationProperty Name="PostJobTables" Relationship="Self.FK_PostJobTable_CompanyTable" FromRole="CompanyTable" ToRole="PostJobTable" />
+        </EntityType>
+        <EntityType Name="EmployeesTable">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Education" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="WorkExperience" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Skills" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qualification" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="JobReference" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Resume" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK_EmployeesTable_UserTable" FromRole="EmployeesTable" ToRole="UserTable" />
         </EntityType>
         <EntityType Name="JobCategoryTable">
           <Key>
@@ -394,9 +414,9 @@
           <Property Name="EmailAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CompanyTables" Relationship="Self.FK_CompanyTable_UserTable" FromRole="UserTable" ToRole="CompanyTable" />
+          <NavigationProperty Name="EmployeesTables" Relationship="Self.FK_EmployeesTable_UserTable" FromRole="UserTable" ToRole="EmployeesTable" />
           <NavigationProperty Name="PostJobTables" Relationship="Self.FK_PostJobTable_UserTable" FromRole="UserTable" ToRole="PostJobTable" />
           <NavigationProperty Name="UserTypeTable" Relationship="Self.FK_UserTypeTable_UserTable" FromRole="UserTable" ToRole="UserTypeTable" />
-          <NavigationProperty Name="EmployeesTables" Relationship="JobsPortalDbModel.FK_EmployeesTable_UserTable" FromRole="UserTable" ToRole="EmployeesTable" />
         </EntityType>
         <EntityType Name="UserTypeTable">
           <Key>
@@ -427,6 +447,18 @@
             </Principal>
             <Dependent Role="PostJobTable">
               <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeesTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="EmployeesTable" Type="Self.EmployeesTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="EmployeesTable">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -518,6 +550,7 @@
         </Association>
         <EntityContainer Name="JobsPortalDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CompanyTables" EntityType="Self.CompanyTable" />
+          <EntitySet Name="EmployeesTables" EntityType="Self.EmployeesTable" />
           <EntitySet Name="JobCategoryTables" EntityType="Self.JobCategoryTable" />
           <EntitySet Name="JobNatureTables" EntityType="Self.JobNatureTable" />
           <EntitySet Name="JobRequirementDetailsTables" EntityType="Self.JobRequirementDetailsTable" />
@@ -533,6 +566,10 @@
           <AssociationSet Name="FK_PostJobTable_CompanyTable" Association="Self.FK_PostJobTable_CompanyTable">
             <End Role="CompanyTable" EntitySet="CompanyTables" />
             <End Role="PostJobTable" EntitySet="PostJobTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeesTable_UserTable" Association="Self.FK_EmployeesTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="EmployeesTable" EntitySet="EmployeesTables" />
           </AssociationSet>
           <AssociationSet Name="FK_PostJobTable_JobCategoryTable" Association="Self.FK_PostJobTable_JobCategoryTable">
             <End Role="JobCategoryTable" EntitySet="JobCategoryTables" />
@@ -562,47 +599,7 @@
             <End Role="UserTypeTable" EntitySet="UserTypeTables" />
             <End Role="UserTable" EntitySet="UserTables" />
           </AssociationSet>
-          <EntitySet Name="EmployeesTables" EntityType="JobsPortalDbModel.EmployeesTable" />
-          <AssociationSet Name="FK_EmployeesTable_UserTable" Association="JobsPortalDbModel.FK_EmployeesTable_UserTable">
-            <End Role="UserTable" EntitySet="UserTables" />
-            <End Role="EmployeesTable" EntitySet="EmployeesTables" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="EmployeesTable">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
-          <Property Name="Education" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="WorkExperience" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Skills" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Qualification" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="PermanentAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="JobReference" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="ResumeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ResumeData" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ResumeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserTable" Relationship="JobsPortalDbModel.FK_EmployeesTable_UserTable" FromRole="EmployeesTable" ToRole="UserTable" />
-        </EntityType>
-        <Association Name="FK_EmployeesTable_UserTable">
-          <End Type="JobsPortalDbModel.UserTable" Role="UserTable" Multiplicity="1" />
-          <End Type="JobsPortalDbModel.EmployeesTable" Role="EmployeesTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserTable">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="EmployeesTable">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -620,6 +617,27 @@
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeesTables">
+            <EntityTypeMapping TypeName="JobsPortalDbModel.EmployeesTable">
+              <MappingFragment StoreEntitySet="EmployeesTable">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
+                <ScalarProperty Name="Skills" ColumnName="Skills" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="JobReference" ColumnName="JobReference" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Resume" ColumnName="Resume" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -706,29 +724,6 @@
               <MappingFragment StoreEntitySet="UserTypeTable">
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmployeesTables">
-            <EntityTypeMapping TypeName="JobsPortalDbModel.EmployeesTable">
-              <MappingFragment StoreEntitySet="EmployeesTable">
-                <ScalarProperty Name="ResumeType" ColumnName="ResumeType" />
-                <ScalarProperty Name="ResumeData" ColumnName="ResumeData" />
-                <ScalarProperty Name="ResumeName" ColumnName="ResumeName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="JobReference" ColumnName="JobReference" />
-                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="Skills" ColumnName="Skills" />
-                <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
-                <ScalarProperty Name="Education" ColumnName="Education" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

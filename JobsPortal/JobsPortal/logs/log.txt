@@ -95,3 +95,147 @@
 2023-10-24 14:30:33,914 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
 2023-10-24 14:30:33,915 WARN JobsPortal.Controllers.EmployeesTablesController - EmployeeID session value is missing or zero
 2023-10-24 14:30:52,858 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:12:33,704 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:14:11,220 INFO JobsPortal.Controllers.UserController - User with username prashastvats logged in successfully.
+2023-10-25 11:14:11,250 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:14:27,879 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 11:14:27,895 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:15:03,061 INFO JobsPortal.Controllers.UserController - User with username prashastvatscompany logged in successfully.
+2023-10-25 11:15:03,080 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:15:14,907 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 11:15:14,929 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:15:37,672 INFO JobsPortal.Controllers.UserController - User with username nikith logged in successfully.
+2023-10-25 11:15:37,688 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:15:42,408 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 11:18:51,786 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 11:19:43,296 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 11:19:50,420 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 11:45:07,408 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:45:43,665 INFO JobsPortal.Controllers.UserController - User with username aryan logged in successfully.
+2023-10-25 11:45:43,696 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:46:54,006 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:47:46,975 INFO JobsPortal.Controllers.UserController - User with username nikith logged in successfully.
+2023-10-25 11:47:47,000 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:48:04,932 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 11:48:10,359 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 11:48:16,641 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 11:48:20,925 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 11:48:28,157 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 11:48:52,521 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 11:48:52,555 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:51:01,629 INFO JobsPortal.Controllers.UserController - User with username prashastvatscompany logged in successfully.
+2023-10-25 11:51:01,649 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:55:57,024 INFO JobsPortal.Controllers.JobController - DeleteReq - Successfully deleted job requirement with ID: 6
+2023-10-25 11:56:06,395 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 11:56:06,414 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:56:23,375 INFO JobsPortal.Controllers.UserController - User with username prashastvats logged in successfully.
+2023-10-25 11:56:23,398 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 11:56:31,268 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Index action.
+2023-10-25 11:56:38,009 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Edit action (GET) for ID: 1.
+2023-10-25 11:56:44,004 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Index action.
+2023-10-25 11:56:53,677 INFO JobsPortal.Controllers.JobNatureTablesController - Accessing JobNatureTables Index action.
+2023-10-25 11:58:24,586 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 11:58:24,629 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 12:54:56,878 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 12:55:39,954 ERROR JobsPortal.Controllers.UserController - Error while creating new user.
+System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at JobsPortal.Controllers.UserController.NewUser(UserMV userMV) in D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\Controllers\UserController.cs:line 115
+2023-10-25 12:55:53,487 ERROR JobsPortal.Controllers.UserController - Error while creating new user.
+System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at JobsPortal.Controllers.UserController.NewUser(UserMV userMV) in D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\Controllers\UserController.cs:line 89
+2023-10-25 12:59:00,333 INFO JobsPortal.Controllers.UserController - New user with username prashastvatscompany created successfully.
+2023-10-25 13:00:33,024 ERROR JobsPortal.Controllers.UserController - Error while creating new user.
+System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at JobsPortal.Controllers.UserController.NewUser(UserMV userMV) in D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\Controllers\UserController.cs:line 89
+2023-10-25 13:00:46,910 ERROR JobsPortal.Controllers.UserController - Error while creating new user.
+System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at JobsPortal.Controllers.UserController.NewUser(UserMV userMV) in D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\Controllers\UserController.cs:line 89
+2023-10-25 13:09:12,157 ERROR JobsPortal.Controllers.UserController - Error while creating new user.
+System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at JobsPortal.Controllers.UserController.NewUser(UserMV userMV) in D:\Mphasis\ReRLLProject\ApplicationUI\JobsPortal\JobsPortal\Controllers\UserController.cs:line 89
+2023-10-25 13:20:42,851 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:22:00,301 INFO JobsPortal.Controllers.UserController - User with username prashastvats logged in successfully.
+2023-10-25 13:22:00,305 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:22:03,480 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Index action.
+2023-10-25 13:22:10,010 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Edit action (GET) for ID: 1.
+2023-10-25 13:22:25,350 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Edit action (GET) for ID: 1.
+2023-10-25 13:22:28,096 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 13:22:28,101 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:22:40,493 INFO JobsPortal.Controllers.UserController - User with username nikith logged in successfully.
+2023-10-25 13:22:40,498 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:22:43,784 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 13:23:41,950 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 13:23:41,955 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:28:25,665 INFO JobsPortal.Controllers.UserController - User with username aryan logged in successfully.
+2023-10-25 13:28:25,671 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:28:28,185 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 13:28:30,539 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 13:28:35,546 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 13:30:03,029 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 13:30:03,037 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:30:14,105 INFO JobsPortal.Controllers.UserController - User with username prashastvatscompany logged in successfully.
+2023-10-25 13:30:14,110 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:40:20,323 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:40:22,753 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 13:40:22,759 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:40:34,717 INFO JobsPortal.Controllers.UserController - User with username prashastvats logged in successfully.
+2023-10-25 13:40:34,723 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:40:41,498 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Index action.
+2023-10-25 13:40:44,670 INFO JobsPortal.Controllers.JobCategoryTablesController - Accessing JobCategoryTables Edit action (GET) for ID: 1.
+2023-10-25 13:44:03,088 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:44:16,224 INFO JobsPortal.Controllers.UserController - User with username prashastvatscompany logged in successfully.
+2023-10-25 13:44:16,232 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 13:51:25,531 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 15:13:38,544 INFO JobsPortal.Controllers.UserController - User with username prashastvats logged in successfully.
+2023-10-25 15:13:38,558 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 15:14:15,631 INFO JobsPortal.Controllers.UserController - DeleteUser - Successfully deleted user with ID: 13
+2023-10-25 18:41:22,585 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 18:41:52,446 INFO JobsPortal.Controllers.UserController - User with username nikith logged in successfully.
+2023-10-25 18:41:52,462 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 18:41:59,398 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 18:42:04,464 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 18:42:15,067 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 18:42:18,360 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 18:42:25,530 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 19:09:43,634 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 19:10:08,913 INFO JobsPortal.Controllers.UserController - User with username aryan logged in successfully.
+2023-10-25 19:10:08,937 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 19:10:11,520 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 19:10:15,427 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 19:17:01,459 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 19:17:09,754 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 19:17:09,770 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 19:17:29,959 INFO JobsPortal.Controllers.UserController - User with username aryan logged in successfully.
+2023-10-25 19:17:29,974 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 19:17:32,775 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 19:17:38,230 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 19:18:50,326 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 19:19:55,857 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 19:23:31,682 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 19:23:37,658 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 19:24:06,732 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 19:24:33,196 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 19:24:33,218 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 19:48:56,059 INFO JobsPortal.Controllers.UserController - User with username aryan logged in successfully.
+2023-10-25 19:48:56,075 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 19:49:32,164 INFO JobsPortal.Controllers.UserController - User logged out.
+2023-10-25 19:49:32,170 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 20:00:15,189 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 20:00:57,502 INFO JobsPortal.Controllers.UserController - User with username nikith logged in successfully.
+2023-10-25 20:00:57,512 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 20:01:00,801 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 20:01:04,648 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 20:01:57,275 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 21:33:23,274 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 21:33:47,336 INFO JobsPortal.Controllers.UserController - User with username aryan logged in successfully.
+2023-10-25 21:33:47,344 INFO JobsPortal.Controllers.HomeController - Accessed HomeController's Index action.
+2023-10-25 21:33:50,048 INFO JobsPortal.Controllers.EmployeesTablesController - Details action called
+2023-10-25 21:33:53,330 INFO JobsPortal.Controllers.EmployeesTablesController - Edit action called
+2023-10-25 21:34:04,909 INFO JobsPortal.Controllers.EmployeesTablesController - Apply action called
+2023-10-25 21:45:19,608 INFO JobsPortal.Controllers.EmployeesTablesController - Apply action called
+2023-10-25 21:50:44,249 INFO JobsPortal.Controllers.EmployeesTablesController - Apply action called

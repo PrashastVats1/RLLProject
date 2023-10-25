@@ -54,6 +54,8 @@
       <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -63,6 +65,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -289,11 +292,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\MailHelper.cs" />
     <Compile Include="Helper\Email.cs" />
     <Compile Include="Models\CompanyMV.cs" />
     <Compile Include="Models\EmployeeMV.cs" />
     <Compile Include="Models\FilterJobMV.cs" />
     <Compile Include="Models\ForgotPasswordMV.cs" />
+    <Compile Include="Models\JobApplicationEmailVM.cs" />
     <Compile Include="Models\JobReqMV.cs" />
     <Compile Include="Models\JobRequirementDetailsMV.cs" />
     <Compile Include="Models\JobRequirementsMV.cs" />
@@ -400,6 +405,7 @@
     <Content Include="Views\UserProfile\UserProfile.cshtml" />
     <Content Include="Views\EmployeesTables\Details.cshtml" />
     <Content Include="Views\EmployeesTables\Edit.cshtml" />
+    <Content Include="Views\EmployeesTables\Apply.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -409,6 +415,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadImages\" />
+    <Folder Include="UploadResumes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseAccessLayer\DatabaseAccessLayer.csproj">

@@ -28,9 +28,7 @@ namespace DatabaseAccessLayer
         public string PermanentAddress { get; set; }
         public string JobReference { get; set; }
         public string Description { get; set; }
-        public string ResumeName { get; set; }
-        public byte[] ResumeData { get; set; }
-        public string ResumeType { get; set; }
+        public string Resume { get; set; }
     
         public virtual UserTable UserTable { get; set; }
     }

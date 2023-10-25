@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
+using System.Net;
 
 namespace JobsPortal.Controllers
 {
@@ -25,20 +26,21 @@ namespace JobsPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult NewUser(UserMV userMV)
         {
+            bool hasValidationErrors = false;
             if (ModelState.IsValid)
             {
                 var checkUser = db.UserTables.Where(u => u.EmailAddress == userMV.EmailAddress).FirstOrDefault();
                 if (checkUser != null)
                 {
                     ModelState.AddModelError("EmailAddress", "Email is already registered");
-                    return View(userMV);
+                    hasValidationErrors = true;
                 }
 
                 checkUser = db.UserTables.Where(u => u.UserName == userMV.UserName).FirstOrDefault();
                 if (checkUser != null)
                 {
                     ModelState.AddModelError("UserName", "User Name is already registered");
-                    return View(userMV);
+                    hasValidationErrors = true;
                 }
 
                 using (var transact = db.Database.BeginTransaction())
@@ -59,28 +61,24 @@ namespace JobsPortal.Controllers
                             var company = new CompanyTable();
                             company.UserID = user.UserID;
                             if (string.IsNullOrEmpty(userMV.Company.EmailAddress))
-                            {
-                                transact.Rollback();
+                            {                                
                                 ModelState.AddModelError("Company.EmailAddress", "*Required");
-                                return View(userMV);
+                                hasValidationErrors = true;
                             }
                             if (string.IsNullOrEmpty(userMV.Company.CompanyName))
                             {
-                                transact.Rollback();
                                 ModelState.AddModelError("Company.CompanyName", "*Required");
-                                return View(userMV);
+                                hasValidationErrors = true;
                             }
                             if (string.IsNullOrEmpty(userMV.Company.PhoneNo))
                             {
-                                transact.Rollback();
                                 ModelState.AddModelError("Company.PhoneNo", "*Required");
-                                return View(userMV);
+                                hasValidationErrors = true;
                             }
                             if (string.IsNullOrEmpty(userMV.Company.Description))
                             {
-                                transact.Rollback();
                                 ModelState.AddModelError("Company.Description", "*Required");
-                                return View(userMV);
+                                hasValidationErrors = true;
                             }
                             company.EmailAddress = userMV.Company.EmailAddress;
                             company.CompanyName = userMV.Company.CompanyName;
@@ -97,21 +95,18 @@ namespace JobsPortal.Controllers
                             employee.UserId = user.UserID;
                             if (string.IsNullOrEmpty(userMV.Employee.EmailAddress))
                             {
-                                transact.Rollback();
                                 ModelState.AddModelError("Employee.EmailAddress", "*Required");
-                                return View(userMV);
+                                hasValidationErrors = true;
                             }
                             if (string.IsNullOrEmpty(userMV.Employee.EmployeeName))
                             {
-                                transact.Rollback();
                                 ModelState.AddModelError("Employee.EmployeeName", "*Required");
-                                return View(userMV);
+                                hasValidationErrors = true;
                             }
                             if (string.IsNullOrEmpty(userMV.Employee.Gender))
                             {
-                                transact.Rollback();
                                 ModelState.AddModelError("Employee.Gender", "*Required");
-                                return View(userMV);
+                                hasValidationErrors = true;
                             }
                             employee.EmailAddress = userMV.Employee.EmailAddress;
                             employee.EmployeeName = userMV.Employee.EmployeeName;
@@ -119,6 +114,10 @@ namespace JobsPortal.Controllers
                             employee.Photo = "~/Content/assests/img/adapt_icon/3.png";
                             db.EmployeesTables.Add(employee);
                             db.SaveChanges();
+                        }
+                        else
+                        {
+                            transact.Rollback();
                         }
                         transact.Commit();
                         log.Info($"New user with username {user.UserName} created successfully.");
@@ -235,6 +234,66 @@ namespace JobsPortal.Controllers
             }
             return View(forgotPasswordMV);
         }
+
+        public ActionResult DeleteUser(int? id)
+        {
+            // Check if the user is logged in and has admin rights. 
+            // For this example, I assume an admin has a UserTypeID different from 2 and 3. 
+            // Adjust this as per your application logic.
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserTypeID"])) ||
+                (Convert.ToInt32(Session["UserTypeID"]) == 2) ||
+                (Convert.ToInt32(Session["UserTypeID"]) == 3))
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Fetch the user
+            var user = db.UserTables.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            using (var transact = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    // If user is a provider, delete the associated company
+                    if (user.UserTypeID == 2 && user.CompanyTables.Any())
+                    {
+                        var company = user.CompanyTables.FirstOrDefault();
+                        db.CompanyTables.Remove(company);
+                    }
+                    // If user is an employee, delete the associated employee record
+                    else if (user.UserTypeID == 3 && user.EmployeesTables.Any())
+                    {
+                        var employee = user.EmployeesTables.FirstOrDefault();
+                        db.EmployeesTables.Remove(employee);
+                    }
+
+                    // Delete the user
+                    db.UserTables.Remove(user);
+                    db.SaveChanges();
+
+                    transact.Commit();
+
+                    log.Info($"DeleteUser - Successfully deleted user with ID: {id}");
+                }
+                catch (Exception ex)
+                {
+                    log.Error($"Error deleting user with ID: {id}.", ex);
+                    transact.Rollback();
+                }
+            }
+
+            return RedirectToAction("AllUsers");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
